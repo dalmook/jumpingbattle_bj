@@ -16,7 +16,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    resultDiv.textContent = '';
+
+    // 최종 확인 팝업
+    if (!confirm('입력한 정보가 맞습니까?')) {
+      return;
+    }
 
     if (!difficultyInput.value) {
       alert('난이도를 선택해주세요.');
