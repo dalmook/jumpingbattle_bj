@@ -1,5 +1,5 @@
 // 배포한 Google Apps Script 웹앱 URL을 붙여넣으세요
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwUPu3ZmcLlAgVyeNbGGcKyDUk0dHe31mrsqZ7SvAf9BOH_A0oQSJJADIF06IhAPWaTdw/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyqkL0yA8VqsYvMpWTnifwxBIs-njQznQfhirf6XhuERh8PjW00TJldoASoO00R0-nizA/exec';
 
 document.addEventListener('DOMContentLoaded', () => {
   const timeSelect = document.getElementById('timeSlot');
