@@ -1,24 +1,49 @@
-// POST 요청 처리: ContentService.TextOutput은 setHeader를 지원하지 않습니다.
-// CORS 오류가 계속된다면 JSONP 방식을 사용하거나, 요청을 같은 출처로 보내야 합니다.
-function doPost(e) {
-  const sheet = SpreadsheetApp.openById('1yyeDrAueu3BAdSuop4JStzmzRVuIjWaoB0mjPw84BbI').getSheetByName('예약');
-  const { teamName, difficulty, timeSlot, peopleCount, room } = JSON.parse(e.postData.contents);
+// 배포한 Google Apps Script 웹앱 URL을 붙여넣으세요
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyQKxu5FV_0U5WjYKARnNhBt6-eYYx3ugkWlS8odOH5seDssG3BfIcxsZX4AA7VWGR7GA/exec';
 
-  // 중복 예약 체크
-  const rows = sheet.getDataRange().getValues();
-  for (let i = 1; i < rows.length; i++) {
-    const [ , , , t, , r ] = rows[i];
-    if (r === room && t === timeSlot) {
-      // 중복 시 에러 메시지 반환
-      return ContentService.createTextOutput(
-        JSON.stringify({ success: false, message: '이미 예약된 시간입니다.' })
-      ).setMimeType(ContentService.MimeType.JSON);
-    }
+document.addEventListener('DOMContentLoaded', () => {
+  // 12:00 ~ 22:00, 20분 단위
+  const timeSelect = document.getElementById('timeSlot');
+  const startMin = 12 * 60;
+  const endMin = 22 * 60;
+  for (let m = startMin; m <= endMin; m += 20) {
+    const h = String(Math.floor(m / 60)).padStart(2, '0');
+    const min = String(m % 60).padStart(2, '0');
+    timeSelect.innerHTML += `<option value="${h}:${min}">${h}:${min}</option>`;
   }
 
-  // 예약 추가 후 성공 응답
-  sheet.appendRow([new Date(), teamName, difficulty, timeSlot, peopleCount, room]);
-  return ContentService.createTextOutput(
-    JSON.stringify({ success: true })
-  ).setMimeType(ContentService.MimeType.JSON);
-}
+  const form = document.getElementById('reservationForm');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = {
+      teamName: form.teamName.value,
+      difficulty: form.difficulty.value,
+      timeSlot: form.timeSlot.value,
+      peopleCount: form.peopleCount.value,
+      room: form.room.value
+    };
+    const resDiv = document.getElementById('result');
+    resDiv.textContent = '전송 중...';
+    try {
+      const resp = await fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      const result = await resp.json();
+      if (result.success) {
+        alert('예약이 완료되었습니다!');
+        resDiv.textContent = '예약이 완료되었습니다!';
+        form.reset();
+      } else {
+        alert('예약 실패: ' + result.message);
+        resDiv.textContent = `실패: ${result.message}`;
+      }
+    } catch (err) {
+      console.error(err);
+      alert('오류 발생: ' + err.message);
+      resDiv.textContent = '오류 발생. 다시 시도해 주세요.';
+    }
+  });
+});
