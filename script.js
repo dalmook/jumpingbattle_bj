@@ -2,7 +2,7 @@ const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyFCQzVLYUTn4z0wkW8i
 
 // 예약된 목록을 가져오는 GET 호출
 async function fetchBookings() {
-  const res = await fetch(`${SCRIPT_URL}?action=list`, { method: 'GET', mode: 'cors' });
+  const res = await fetch(`${SCRIPT_URL}?action=list`, { method: 'GET', mode: 'no-cors' });
   if (!res.ok) throw new Error(`GET 오류: ${res.status}`);
   const data = await res.json();
   return data.bookings || [];
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       room: form.room.value
     });
     try {
-      const res = await fetch(`${SCRIPT_URL}?${params}`, { method: 'GET', mode: 'cors' });
+      const res = await fetch(`${SCRIPT_URL}?${params}`, { method: 'GET', mode: 'no-cors' });
       if (!res.ok) throw new Error(`요청 오류: ${res.status}`);
       const result = await res.json();
       if (result.success) {
