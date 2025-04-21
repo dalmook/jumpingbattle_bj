@@ -42,7 +42,9 @@ button {
   cursor: pointer;
   border-radius: 4px;
 }
-button:hover { background: #218838; }
+button:hover {
+  background: #218838;
+}
 #result {
   margin-top: 16px;
   text-align: center;
