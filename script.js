@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
     try {
       const resp = await fetch(SCRIPT_URL, {
-        method: 'POST', mode: 'cors', headers: {'Content-Type':'application/json'}, body:JSON.stringify(payload)
+        method: 'POST', mode: 'no cors', headers: {'Content-Type':'application/json'}, body:JSON.stringify(payload)
       });
       if (!resp.ok) throw new Error(`POST 오류: ${resp.status}`);
       const result = await resp.json();
