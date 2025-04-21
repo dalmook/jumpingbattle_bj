@@ -1,4 +1,4 @@
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz48VxKPK8Eeon9urKrOeNS1HU6Ngoig6UiHCOtillGonaoaFIxoQJNGb1KvJL_eyjqSA/exec'
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzJg9-YTEf-740Tx34wswFuLnAkoo339DV_Yey7htZzE_DItzV5VX0fKVLq2uLY4F0OBw/exec'
 
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('reservationForm');
