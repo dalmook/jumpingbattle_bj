@@ -1,58 +1,87 @@
 // 배포한 Google Apps Script 웹앱 URL을 붙여넣으세요
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyqkL0yA8VqsYvMpWTnifwxBIs-njQznQfhirf6XhuERh8PjW00TJldoASoO00R0-nizA/exec';
 
-document.addEventListener('DOMContentLoaded', () => {
-  // 시간 슬롯 생성: 12:00 ~ 22:00, 20분 단위
+// 예약된 목록을 가져오는 GET 호출
+async function fetchBookings() {
+  const res = await fetch(SCRIPT_URL);
+  if (!res.ok) throw new Error(`GET 오류: ${res.status}`);
+  const data = await res.json();
+  return data.bookings || [];
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+  const roomSelect = document.getElementById('room');
   const timeSelect = document.getElementById('timeSlot');
-  const startMin = 12 * 60;
-  const endMin = 22 * 60;
-  for (let m = startMin; m <= endMin; m += 20) {
-    const h = String(Math.floor(m / 60)).padStart(2, '0');
-    const mm = String(m % 60).padStart(2, '0');
-    const option = document.createElement('option');
-    option.value = `${h}:${mm}`;
-    option.textContent = `${h}:${mm}`;
-    timeSelect.appendChild(option);
+  const form = document.getElementById('reservationForm');
+  const resultDiv = document.getElementById('result');
+
+  // 방 리스트 하드코딩
+  ['C1','C2','A1','B1'].forEach(r => {
+    const opt = document.createElement('option'); opt.value = r; opt.textContent = `${r}`;
+    roomSelect.appendChild(opt);
+  });
+
+  // 현재 유효 슬롯 계산 함수
+  function generateSlots(bookings, selectedRoom) {
+    timeSelect.innerHTML = '';
+    const now = new Date();
+    const nowMin = now.getHours() * 60 + now.getMinutes();
+    const threshold = nowMin - 5; // 15분 게임, 5분 지나면 다음 슬롯
+    const startMin = 12 * 60, endMin = 22 * 60;
+    for (let m = startMin; m <= endMin; m += 20) {
+      if (m < threshold) continue;
+      // 이미 예약된 방/시간은 건너뜀
+      if (bookings.some(b => b.room === selectedRoom && b.timeSlot === `${String(Math.floor(m/60)).padStart(2,'0')}:${String(m%60).padStart(2,'0')}`)) continue;
+      const h = String(Math.floor(m/60)).padStart(2,'0');
+      const mm = String(m%60).padStart(2,'0');
+      const opt = document.createElement('option');
+      opt.value = `${h}:${mm}`; opt.textContent = `${h}:${mm}`;
+      timeSelect.appendChild(opt);
+    }
   }
 
-  const form = document.getElementById('reservationForm');
-  form.addEventListener('submit', async (e) => {
+  let bookings = [];
+  try {
+    bookings = await fetchBookings();
+  } catch (err) {
+    console.error(err);
+  }
+
+  // 방 선택 시 슬롯 업데이트
+  roomSelect.addEventListener('change', () => {
+    generateSlots(bookings, roomSelect.value);
+  });
+  // 초기 방/슬롯 세팅
+  roomSelect.value = roomSelect.options[0].value;
+  generateSlots(bookings, roomSelect.value);
+
+  // 예약 제출
+  form.addEventListener('submit', async e => {
     e.preventDefault();
-    const resultDiv = document.getElementById('result');
     resultDiv.textContent = '전송 중...';
-
+    const payload = {
+      teamName: form.teamName.value.trim(),
+      difficulty: form.difficulty.value,
+      timeSlot: form.timeSlot.value,
+      peopleCount: form.peopleCount.value,
+      room: form.room.value
+    };
     try {
-      const response = await fetch(SCRIPT_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          teamName: form.teamName.value.trim(),
-          difficulty: form.difficulty.value,
-          timeSlot: form.timeSlot.value,
-          peopleCount: form.peopleCount.value,
-          room: form.room.value
-        })
+      const resp = await fetch(SCRIPT_URL, {
+        method: 'POST', mode: 'cors', headers: {'Content-Type':'application/json'}, body:JSON.stringify(payload)
       });
-
-      if (!response.ok) {
-        throw new Error(`서버 오류: ${response.status}`);
-      }
-
-      const result = await response.json();
+      if (!resp.ok) throw new Error(`POST 오류: ${resp.status}`);
+      const result = await resp.json();
       if (result.success) {
-        alert('예약이 완료되었습니다!');
-        resultDiv.textContent = '예약이 완료되었습니다!';
-        form.reset();
-      } else {
-        alert('예약 실패: ' + result.message);
-        resultDiv.textContent = `실패: ${result.message}`;
-      }
+        alert('예약 성공!'); form.reset();
+        bookings.push(payload);
+        generateSlots(bookings, form.room.value);
+        resultDiv.textContent = '예약 성공!';
+      } else throw new Error(result.message);
     } catch (err) {
       console.error(err);
-      alert('서버 요청은 완료되었습니다. 시트를 확인해주세요.');
-      resultDiv.textContent = '예약 요청은 완료되었습니다. 시트를 확인해주세요.';
+      alert(`오류: ${err.message}`);
+      resultDiv.textContent = `오류: ${err.message}`;
     }
   });
 });
-
