@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const form = document.getElementById('reservationForm');
   const resultDiv = document.getElementById('result');
 
-  // 방 리스트 하드코딩
+  // 방 리스트
   ['C1','C2','A1','B1'].forEach(r => {
     const opt = document.createElement('option');
     opt.value = r;
@@ -22,12 +22,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     roomSelect.appendChild(opt);
   });
 
-  // 슬롯 생성 함수
+  // 슬롯 생성
   function generateSlots(bookings, selectedRoom) {
     timeSelect.innerHTML = '';
     const now = new Date();
     const nowMin = now.getHours() * 60 + now.getMinutes();
-    const threshold = nowMin - 5;
+    const threshold = nowMin - 5; // 5분 경과 시 다음 슬롯
     const startMin = 12 * 60, endMin = 22 * 60;
     for (let m = startMin; m <= endMin; m += 20) {
       if (m < threshold) continue;
@@ -39,22 +39,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
-  // 초기 데이터 로드
+  // 초기 로드
   let bookings = [];
-  try {
-    bookings = await fetchBookings();
-  } catch (err) {
-    console.error('GET 오류:', err);
-  }
+  try { bookings = await fetchBookings(); } catch (err) { console.error(err); }
 
-  // 방 변경 시 슬롯 갱신
   roomSelect.addEventListener('change', () => {
     generateSlots(bookings, roomSelect.value);
   });
   roomSelect.value = roomSelect.options[0].value;
   generateSlots(bookings, roomSelect.value);
 
-  // 예약 GET 요청 (쿼리 스트링)으로 처리
+  // 제출
   form.addEventListener('submit', async e => {
     e.preventDefault();
     resultDiv.textContent = '전송 중...';
@@ -67,7 +62,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       room: form.room.value
     });
     try {
-      const res = await fetch(`${SCRIPT_URL}?${params.toString()}`, { method: 'GET', mode: 'cors' });
+      const res = await fetch(`${SCRIPT_URL}?${params}`, { method: 'GET', mode: 'cors' });
       if (!res.ok) throw new Error(`요청 오류: ${res.status}`);
       const result = await res.json();
       if (result.success) {
@@ -80,7 +75,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         throw new Error(result.message);
       }
     } catch (err) {
-      console.error('Reserve 오류:', err);
+      console.error(err);
       alert(`오류: ${err.message}`);
       resultDiv.textContent = `오류: ${err.message}`;
     }
