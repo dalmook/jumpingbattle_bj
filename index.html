@@ -9,14 +9,15 @@
 <body>
   <div class="container">
     <h1>점핑배틀 예약</h1>
-    <form id="reservationForm">
+    <form id="reservationForm" novalidate>
       <div class="field">
         <label for="teamName">팀명</label>
-        <input type="text" id="teamName" name="teamName" required>
+        <input type="text" id="teamName" name="teamName" placeholder="팀명을 입력하세요" required>
       </div>
       <div class="field">
         <label for="difficulty">난이도</label>
-        <select id="difficulty" name="difficulty">
+        <select id="difficulty" name="difficulty" required>
+          <option value="">선택</option>
           <option value="베이직">베이직</option>
           <option value="이지">이지</option>
           <option value="노멀">노멀</option>
@@ -24,8 +25,10 @@
         </select>
       </div>
       <div class="field">
-        <label for="contact">연락처 (옵션)</label>
-        <input type="tel" id="contact" name="contact" placeholder="010-1234-5678">
+        <label for="contact">연락처 (숫자만)</label>
+        <input type="text" id="contact" name="contact" placeholder="01041668764"
+               pattern="\\d{10,11}" maxlength="11"
+               oninput="this.value = this.value.replace(/[^0-9]/g, '')">
       </div>
       <div class="field">
         <label for="vehicle">차량번호 (옵션)</label>
@@ -33,7 +36,7 @@
       </div>
       <button type="submit">예약하기</button>
     </form>
-    <div id="result"></div>
+    <div id="result" class="result"></div>
   </div>
   <script src="script.js"></script>
 </body>
