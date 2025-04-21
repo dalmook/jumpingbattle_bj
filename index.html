@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>점핑배틀 예약</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>점핑배틀 예약 시스템</h1>
+    <form id="reservationForm">
+      <label>팀명:<input type="text" id="teamName" required /></label>
+      <label>난이도:
+        <select id="difficulty">
+          <option value="베이직">베이직</option>
+          <option value="이지">이지</option>
+          <option value="노멀">노멀</option>
+          <option value="하드">하드</option>
+        </select>
+      </label>
+      <label>시간:
+        <select id="timeSlot"></select>
+      </label>
+      <label>인원수:<input type="number" id="peopleCount" min="1" max="20" required /></label>
+      <label>방 선택:
+        <select id="room">
+          <option value="C1">C1 (소형)</option>
+          <option value="C2">C2 (소형)</option>
+          <option value="A1">A1 (중형)</option>
+          <option value="B1">B1 (대형)</option>
+        </select>
+      </label>
+      <button type="submit">예약하기</button>
+    </form>
+    <div id="result"></div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
