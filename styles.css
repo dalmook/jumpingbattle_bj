@@ -25,14 +25,14 @@ h1 {
   margin-bottom: 16px;
   text-align: left;
 }
-.field label {
+.field label,
+.field span {
   display: block;
   margin-bottom: 6px;
   font-weight: 600;
   color: #555;
 }
-.field input,
-.field select {
+.field input {
   width: 100%;
   padding: 10px 12px;
   font-size: 1rem;
@@ -40,12 +40,29 @@ h1 {
   border-radius: 6px;
   transition: border-color 0.2s;
 }
-.field input:focus,
-.field select:focus {
+.field input:focus {
   border-color: #0083B0;
   outline: none;
 }
-button {
+.difficulty-buttons {
+  display: flex;
+  gap: 8px;
+}
+.difficulty-buttons button {
+  flex: 1;
+  padding: 10px;
+  background: #f4f4f4;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+.difficulty-buttons button.selected {
+  background: #0083B0;
+  color: #fff;
+  border-color: #005f7f;
+}
+button[type="submit"] {
   width: 100%;
   padding: 12px;
   font-size: 1rem;
@@ -57,7 +74,7 @@ button {
   cursor: pointer;
   transition: background-color 0.2s;
 }
-button:hover {
+button[type="submit"]:hover {
   background-color: #005f7f;
 }
 .result {
