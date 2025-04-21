@@ -28,7 +28,7 @@ h1 {
   font-size: 0.9rem;
 }
 .field input,
-.field select,
+field select,
 button {
   width: 100%;
   padding: 8px;
