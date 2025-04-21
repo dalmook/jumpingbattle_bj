@@ -11,14 +11,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const payload = {
       teamName: form.teamName.value.trim(),
       difficulty: form.difficulty.value,
-      contact: form.contact.value.trim(),
-      vehicle: form.vehicle.value.trim()
+      // 연락처는 옵션, 빈 문자열 허용
+      contact: form.contact.value.trim() || '',
+      vehicle: form.vehicle.value.trim() || ''
     };
 
     try {
       const resp = await fetch(SCRIPT_URL, {
         method: 'POST',
-        mode: 'cors',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
@@ -33,8 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     } catch (err) {
       console.error('예약 오류:', err);
-      alert(`오류: ${err.message}`);
-      resultDiv.textContent = `오류: ${err.message}`;
+      alert('오류: CORS 설정을 확인해주세요.');
+      resultDiv.textContent = '요청 중 오류가 발생했습니다.';
     }
   });
 });
