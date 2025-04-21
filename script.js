@@ -1,4 +1,4 @@
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzvhoiw98cWzpQyYCE0C18aFRMFwHlZCiFVTz32hnZMOiasEsYvNNZbBXKgNG6q4xr8/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzzu9QneZHjuSa7Wx8ZOpkxrfVq-cyocuA90F7y1RoNqgyiFozJ2Ud9A6qvJ8s1dnbv0A/exec';
 
 document.addEventListener('DOMContentLoaded', () => {
   const timeSelect = document.getElementById('timeSlot');
