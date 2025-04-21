@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const response = await fetch(SCRIPT_URL, {
         method: 'POST',
-        mode: 'cors',
+        mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           teamName: form.teamName.value.trim(),
