@@ -1,5 +1,5 @@
 // 배포한 Google Apps Script 웹앱 URL을 붙여넣으세요
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyVaoCPN1nKx65iN2F2Nx5FDS28OtMPD4fgC25FAaVSVVz0fyqQscOUWOGyu07gbXYGxg/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw3777z0_ye4YQdcjH0QxhLDVLLMmzWnNG0gRLeNUvntxtQdjBv5fQfrHF0mYMPtLxabg/exec';
 
 document.addEventListener('DOMContentLoaded', () => {
   // 12:00 ~ 22:00, 20분 단위
