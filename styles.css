@@ -1,11 +1,12 @@
+* { box-sizing: border-box; }
 body {
-  font-family: Arial, sans-serif;
-  background: #f4f4f4;
+  margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  margin: 0;
+  background: #f4f4f4;
+  font-family: Arial, sans-serif;
 }
 .container {
   background: #fff;
@@ -16,33 +17,34 @@ body {
 }
 h1 {
   text-align: center;
-  font-size: 1.5rem;
   margin-bottom: 16px;
 }
-form label {
-  display: block;
+.field {
   margin-bottom: 12px;
+}
+.field label {
+  display: block;
+  margin-bottom: 4px;
   font-size: 0.9rem;
 }
-input, select, button {
+.field input,
+.field select,
+button {
   width: 100%;
   padding: 8px;
-  margin-top: 4px;
-  box-sizing: border-box;
+  font-size: 1rem;
 }
 button {
+  margin-top: 8px;
   background: #28a745;
   color: #fff;
   border: none;
   cursor: pointer;
-  font-size: 1rem;
-  margin-top: 12px;
+  border-radius: 4px;
 }
-button:hover {
-  background: #218838;
-}
+button:hover { background: #218838; }
 #result {
   margin-top: 16px;
   text-align: center;
-  font-size: 0.95rem;
+  color: #333;
 }
