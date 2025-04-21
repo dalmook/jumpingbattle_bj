@@ -22,10 +22,17 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const resp = await fetch(SCRIPT_URL, { method:'POST', mode:'cors', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data) });
       const result = await resp.json();
-      resDiv.textContent = result.success ? '예약이 완료되었습니다!' : `실패: ${result.message}`;
-      if(result.success) e.target.reset();
+      if (result.success) {
+        alert('예약이 완료되었습니다!');
+        resDiv.textContent = '예약이 완료되었습니다!';
+        e.target.reset();
+      } else {
+        alert('예약 실패: ' + result.message);
+        resDiv.textContent = `실패: ${result.message}`;
+      }
     } catch(err) {
       console.error(err);
+      alert('오류 발생: ' + err.message);
       resDiv.textContent = '오류 발생. 다시 시도해 주세요.';
     }
   });
