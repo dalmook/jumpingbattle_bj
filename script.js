@@ -1,4 +1,4 @@
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyqkL0yA8VqsYvMpWTnifwxBIs-njQznQfhirf6XhuERh8PjW00TJldoASoO00R0-nizA/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyFCQzVLYUTn4z0wkW8iMZcXFga_WVOcX4778t6eMximLWGsItvhnrfZIT8RcEx9086mg/exec';
 
 // 예약된 목록을 가져오는 GET 호출
 async function fetchBookings() {
