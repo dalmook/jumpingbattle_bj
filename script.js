@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const resp = await fetch(SCRIPT_URL, {
         method: 'POST',
-        mode: 'no-cors',
+        mode: 'cors',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
