@@ -10,14 +10,6 @@
   <div class="container">
     <h1>점핑배틀</h1>
     <form id="reservationForm" novalidate>
-      <!-- 워크인 시간 -->
-      <input type="hidden" id="walkInTime" name="walkInTime">
-      <!-- 워크인 고정값 -->
-      <input type="hidden" id="walkInLabel" name="walkInLabel" value="워크인">
-      <div class="field">
-        <label>유형</label>
-        <input type="text" value="워크인" readonly>
-      </div>
       <!-- 팀명 -->
       <div class="field">
         <label for="teamName">팀명</label>
@@ -49,7 +41,7 @@
       <div class="field">
         <label for="vehicle">차량번호 뒤 4자리 (옵션)</label>
         <input type="text" id="vehicle" name="vehicle" placeholder="3456"
-               pattern="\d{4}" maxlength="4"
+               pattern="\\d{4}" maxlength="4"
                oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,4)"
                title="숫자 4자리만 입력 가능합니다">
       </div>
