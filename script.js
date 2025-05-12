@@ -1,6 +1,7 @@
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwM-p-NhwFB5cqR4Zi6i0ALzOKYNyK9oRQ0qu59k9ydDDeTR5qNns31y-eMyWqG5eTCNg/exec'
 
 document.addEventListener('DOMContentLoaded', () => {
+  // 난이도 버튼 설정
   const difficultyInput = document.getElementById('difficulty');
   const buttons = document.querySelectorAll('.difficulty-buttons button');
   buttons.forEach(btn => {
@@ -18,16 +19,20 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
 
     // 최종 확인 팝업
-    if (!confirm('입력한 정보가 맞습니까?')) {
-      return;
-    }
+    if (!confirm('입력한 정보가 맞습니까?')) return;
 
+    // 난이도 확인
     if (!difficultyInput.value) {
       alert('난이도를 선택해주세요.');
       return;
     }
-    if (!form.checkValidity()) {
-      form.reportValidity();
+
+    // 인원 수 계산 및 유효성 검사
+    const adult = Number(form.adultCount.value);
+    const youth = Number(form.youthCount.value);
+    const total = adult + youth;
+    if (total <= 0) {
+      alert('인원 수를 입력해주세요.');
       return;
     }
 
@@ -36,7 +41,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const payload = {
       teamName: form.teamName.value.trim(),
       difficulty: difficultyInput.value,
-      contact: form.contact.value.trim() || '',
+      totalCount: total,
+      youthCount: youth,
       vehicle: form.vehicle.value.trim() || ''
     };
 
@@ -58,4 +64,3 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
-
