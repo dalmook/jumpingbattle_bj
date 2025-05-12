@@ -24,69 +24,63 @@ document.addEventListener('DOMContentLoaded', () => {
     difficultyInput.value = btn.dataset.value;
   }));
 
-  form.addEventListener('submit', async e => {
+  form.addEventListener('submit', e => {
     e.preventDefault();
     const submitBtn = form.querySelector('button[type="submit"]');
     submitBtn.disabled = true;
 
     // 최종 확인
-    if (!confirm('입력한 정보가 맞습니까?')) {
-      submitBtn.disabled = false;
-      return;
-    }
+    confirm('입력한 정보가 맞습니까?');
 
     // 필수: 팀명, 인원
     const teamName = form.teamName.value.trim();
     const adult = Number(form.adultCount.value);
     const youth = Number(form.youthCount.value);
     if (!teamName) {
-      alert('팀명을 입력해주세요.');
-      submitBtn.disabled = false;
-      return;
+      alert('팀명을 입력해주세요.'); submitBtn.disabled = false; return;
     }
     if (adult + youth <= 0) {
-      alert('인원 수를 입력해주세요.');
-      submitBtn.disabled = false;
-      return;
+      alert('인원 수를 입력해주세요.'); submitBtn.disabled = false; return;
     }
 
     // 슬롯 계산
-    const now = new Date();
-    let h = now.getHours();
-    const m = now.getMinutes();
-    const slots = [0, 20, 40];
-    let chosen = slots.find(s => m <= s + 3);
-    if (chosen === undefined) { h = (h + 1) % 24; chosen = 0; }
+    const now = new Date(); let h = now.getHours(); const m = now.getMinutes();
+    const slots = [0,20,40]; let chosen = slots.find(s=>m<=s+3);
+    if (chosen === undefined) { h=(h+1)%24; chosen=0; }
     const slotStr = String(h).padStart(2,'0') + ':' + String(chosen).padStart(2,'0');
     walkInInput.value = slotStr;
 
-        // 전송 백그라운드로 시작
-    resultDiv.textContent = '전송 중...';
-    const sendPromise = fetch(SCRIPT_URL, {
-      method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-
-    // 팝업은 전송 시작 직후 표시 (비동기 전송)
+    // 완료 팝업 (전송은 비동기로 이어짐)
     alert(
-      '완료되었습니다!\n' +
-      '1. 실내화로 갈아신고,\n' +
-      '2. 짐은 락커에 보관 후\n' +
-      '3. 발목 한번 푸시고\n' +
+      '완료되었습니다!
+' +
+      '1. 실내화로 갈아신고,
+' +
+      '2. 짐은 락커에 보관 후
+' +
+      '3. 발목 한번 푸시고
+' +
       '4. 카운터로 오시면 안내해 드리겠습니다.^^'
     );
 
-    // 전송 완료 후 처리
-    sendPromise.then(() => {
-      resultDiv.textContent = '전송이 완료되었습니다!';
-      form.reset();
-      roomButtons.forEach(b => b.classList.remove('selected'));
-      difficultyButtons.forEach(b => b.classList.remove('selected'));
-      submitBtn.disabled = false;
-    });
-      roomButtons.forEach(b => b.classList.remove('selected'));
-      difficultyButtons.forEach(b => b.classList.remove('selected'));
-      submitBtn.disabled = false;
-    });
+    resultDiv.textContent = '전송 중...';
+    const payload = {
+      walkInTime: slotStr,
+      roomSize: roomInput.value,
+      teamName,
+      difficulty: difficultyInput.value,
+      totalCount: adult+youth,
+      youthCount: youth,
+      vehicle: form.vehicle.value.trim()||''
+    };
+
+    fetch(SCRIPT_URL, {method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
+      .then(()=>{
+        resultDiv.textContent = '전송이 완료되었습니다!';
+        form.reset();
+        roomButtons.forEach(b=>b.classList.remove('selected'));
+        difficultyButtons.forEach(b=>b.classList.remove('selected'));
+        submitBtn.disabled = false;
+      });
   });
 });
