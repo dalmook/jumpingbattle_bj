@@ -9,12 +9,8 @@ body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 .container {
-  position: fixed;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
   background: #fff;
-  padding: 30px;
+  padding: 20px 30px;
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.2);
   width: 360px;
@@ -28,7 +24,7 @@ h1 {
   color: #333;
 }
 .field, .field-group {
-  margin-bottom: 10px;
+  margin-bottom: 16px;
   text-align: left;
 }
 .field label, .field span {
