@@ -60,31 +60,30 @@ document.addEventListener('DOMContentLoaded', () => {
     const slotStr = String(h).padStart(2,'0') + ':' + String(chosen).padStart(2,'0');
     walkInInput.value = slotStr;
 
-    // 즉시 완료
-    alert('완료되었습니다!\n' +
-  '1. 실내화로 갈아신고,\n' +
-  '2. 짐은 락커에 보관 후\n' +
-  '3. 발목 한번 푸시고\n' +
-  '4. 카운터로 오시면 안내해 드리겠습니다.^^');
+        // 전송 백그라운드로 시작
     resultDiv.textContent = '전송 중...';
-
-    const payload = {
-      walkInTime: slotStr,
-      roomSize: roomInput.value,
-      teamName,
-      difficulty: difficultyInput.value,
-      totalCount: adult + youth,
-      youthCount: youth,
-      vehicle: form.vehicle.value.trim() || ''
-    };
-
-    // 백그라운드 전송
-    fetch(SCRIPT_URL, {
+    const sendPromise = fetch(SCRIPT_URL, {
       method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
-    }).then(() => {
+    });
+
+    // 팝업은 전송 시작 직후 표시 (비동기 전송)
+    alert(
+      '완료되었습니다!\n' +
+      '1. 실내화로 갈아신고,\n' +
+      '2. 짐은 락커에 보관 후\n' +
+      '3. 발목 한번 푸시고\n' +
+      '4. 카운터로 오시면 안내해 드리겠습니다.^^'
+    );
+
+    // 전송 완료 후 처리
+    sendPromise.then(() => {
       resultDiv.textContent = '전송이 완료되었습니다!';
       form.reset();
+      roomButtons.forEach(b => b.classList.remove('selected'));
+      difficultyButtons.forEach(b => b.classList.remove('selected'));
+      submitBtn.disabled = false;
+    });
       roomButtons.forEach(b => b.classList.remove('selected'));
       difficultyButtons.forEach(b => b.classList.remove('selected'));
       submitBtn.disabled = false;
