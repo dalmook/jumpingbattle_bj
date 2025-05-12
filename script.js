@@ -1,4 +1,4 @@
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzhJPsGmg2ch728WMiVioMMhmEcXJKboSPMkVATSKmELSPULEIPWfDFUclfaBrLExCLaw/exec'
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwlFqNp21C_XWLD1AANZXycaLixJjISqn-te6t5iSgxUktfmIEldGq-4PjKpLgUMokjvA/exec'
 
 document.addEventListener('DOMContentLoaded', () => {
   const walkInInput = document.getElementById('walkInTime');
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('reservationForm');
   const resultDiv = document.getElementById('result');
 
-  form.addEventListener('submit', async e => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (!confirm('입력한 정보가 맞습니까?')) return;
     if (!difficultyInput.value) { alert('난이도를 선택해주세요.'); return; }
@@ -48,9 +48,10 @@ document.addEventListener('DOMContentLoaded', () => {
       youthCount: youth,
       vehicle: form.vehicle.value.trim() || ''
     };
-    await fetch(SCRIPT_URL, { method:'POST', mode:'no-cors', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)});
+    await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type':'application/json' }, body: JSON.stringify(payload) });
     alert('예약 요청이 전송되었습니다!');
     resultDiv.textContent = '예약 요청이 전송되었습니다!';
-    form.reset(); buttons.forEach(b=>b.classList.remove('selected'));
+    form.reset();
+    buttons.forEach(b=>b.classList.remove('selected'));
   });
 });
