@@ -1,5 +1,5 @@
 // Google Apps Script 웹앱 URL
-const SCRIPT_URL = 'https://script.google.com/macros/s/WEB_APP_ID/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxEbUE5JItCqxMPR_w_cTA2WHvi6IQyngev325RcJYiRQ6WUMGy-bBFzQ4eUx_l58476Q/exec';
 
 document.addEventListener('DOMContentLoaded', () => {
   const difficultyInput = document.getElementById('difficulty');
