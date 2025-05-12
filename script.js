@@ -52,8 +52,8 @@ document.addEventListener('DOMContentLoaded', () => {
       vehicle: form.vehicle.value.trim() || ''
     };
     await fetch(SCRIPT_URL, { method:'POST', mode:'no-cors', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)});
-    alert('예약 요청이 전송되었습니다!');
-    resultDiv.textContent = '예약 요청이 전송되었습니다!';
+    alert('전송되었습니다!');
+    resultDiv.textContent = '전송되었습니다!';
     form.reset(); buttons.forEach(b=>b.classList.remove('selected'));
   });
 });
