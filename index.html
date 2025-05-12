@@ -40,7 +40,7 @@
       <!-- 차량번호 -->
       <div class="field">
         <label for="vehicle">차량번호 뒤 4자리 (옵션)</label>
-        <input type="text" id="vehicle" name="vehicle" placeholder="3456"
+        <input type="number" id="vehicle" name="vehicle" placeholder="3456"
                pattern="\\d{4}" maxlength="4"
                oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,4)"
                title="숫자 4자리만 입력 가능합니다">
