@@ -18,8 +18,18 @@
         <label for="teamName">팀명</label>
         <input type="text" id="teamName" name="teamName" placeholder="팀명을 입력하세요" required>
       </div>
-
-      <!-- 인원 입력 (성인/청소년) -->
+      <!-- 방 크기 -->
+      <div class="field room-group">
+        <span>방 크기</span>
+        <div class="room-buttons">
+          <button type="button" data-value="B1">대형 (B1)</button>
+          <button type="button" data-value="A1">중형 (A1)</button>
+          <button type="button" data-value="C1">소형 (C1)</button>
+          <button type="button" data-value="C2">소형 (C2)</button>
+        </div>
+        <input type="hidden" id="roomSize" name="roomSize" required>
+      </div>
+      <!-- 인원 입력 --> (성인/청소년) -->
       <div class="field-group">
         <div class="field half">
           <label for="adultCount">성인 인원</label>
