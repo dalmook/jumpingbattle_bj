@@ -12,13 +12,7 @@
     <form id="reservationForm" novalidate>
       <!-- 워크인 가능시간 -->
       <input type="hidden" id="walkInTime" name="walkInTime">
-
-      <!-- 팀명 -->
-      <div class="field">
-        <label for="teamName">팀명</label>
-        <input type="text" id="teamName" name="teamName" placeholder="팀명을 입력하세요" required>
-      </div>
-
+      
       <!-- 난이도 -->
       <div class="field difficulty-group">
         <span>난이도</span>
@@ -29,6 +23,12 @@
           <button type="button" data-value="ㅎ하드">하드</button>
         </div>
         <input type="hidden" id="difficulty" name="difficulty" required>
+      </div>
+      
+      <!-- 팀명 -->
+      <div class="field">
+        <label for="teamName">팀명</label>
+        <input type="text" id="teamName" name="teamName" placeholder="팀명을 입력하세요" required>
       </div>
 
       <!-- 인원 입력 -->
