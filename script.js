@@ -76,9 +76,5 @@ document.addEventListener('DOMContentLoaded', () => {
       difficultyButtons.forEach(b => b.classList.remove('selected'));
       submitBtn.disabled = false;
     });
-        roomButtons.forEach(b=>b.classList.remove('selected'));
-        difficultyButtons.forEach(b=>b.classList.remove('selected'));
-        submitBtn.disabled = false;
-      });
   });
 });
