@@ -32,6 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const resultDiv = document.getElementById('result');
 
   form.addEventListener('submit', async e => {
+    console.log('Form submit handler start');
+    console.log('Form values:', { teamName: form.teamName.value, adultCount: form.adultCount.value, youthCount: form.youthCount.value, difficulty: difficultyInput.value, vehicle: form.vehicle.value });
     e.preventDefault();
     if (!confirm('입력한 정보가 맞습니까?')) return;
     if (!difficultyInput.value) { alert('난이도를 선택해주세요.'); return; }
