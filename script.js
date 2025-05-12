@@ -108,4 +108,3 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById(id).addEventListener('focus', () => updateRoomAvailability(walkInInput.value))
   );
 });
-});
