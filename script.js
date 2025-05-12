@@ -15,10 +15,30 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('reservationForm');
   const resultDiv = document.getElementById('result');
 
+  // 워크인 슬롯 계산 함수 (00, 20, 40 기준, 3분 초과 시 다음 슬롯)
+  function getWalkInSlot() {
+    const now = new Date();
+    let h = now.getHours();
+    const m = now.getMinutes();
+    const slots = [0, 20, 40];
+    let chosen;
+    for (let slot of slots) {
+      if (m <= slot + 3) {
+        chosen = slot;
+        break;
+      }
+    }
+    if (chosen === undefined) {
+      h = (h + 1) % 24;
+      chosen = 0;
+    }
+    const hh = String(h).padStart(2, '0');
+    const mm = String(chosen).padStart(2, '0');
+    return `${hh}:${mm}`;
+  }
+
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-
-    // 최종 확인 팝업
     if (!confirm('입력한 정보가 맞습니까?')) return;
 
     // 난이도 확인
@@ -36,10 +56,14 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
+    // 워크인 팀명 앞에 슬롯 포함
+    const slot = getWalkInSlot();
+    const teamNameValue = `워크인 ${slot} ${form.teamName.value.trim()}`;
+
     resultDiv.textContent = '요청 전송 중...';
 
     const payload = {
-      teamName: form.teamName.value.trim(),
+      teamName: teamNameValue,
       difficulty: difficultyInput.value,
       totalCount: total,
       youthCount: youth,
