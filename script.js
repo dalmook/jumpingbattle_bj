@@ -30,16 +30,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
+    const submitBtn = form.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
 
     // 최종 확인 팝업
-    if (!confirm('입력한 정보가 맞습니까?')) return;
+    if (!confirm('입력한 정보가 맞습니까?')) { submitBtn.disabled = false; return; }
 
-        // 필수 입력 확인 (팀명 및 인원만 필수)
-    if (!form.teamName.value.trim()) { alert('팀명을 입력해주세요.'); return; }
+    // 필수 입력 확인 (팀명 및 인원만 필수)
+    if (!form.teamName.value.trim()) { alert('팀명을 입력해주세요.'); submitBtn.disabled = false; return; }
     const adult = Number(form.adultCount.value);
     const youth = Number(form.youthCount.value);
     const total = adult + youth;
-    if (total <= 0) { alert('인원 수를 입력해주세요.'); return; }
+    if (total <= 0) { alert('인원 수를 입력해주세요.'); submitBtn.disabled = false; return; }
 
     // 슬롯 계산 (00,20,40 기준, 3분 초과 시 다음 슬롯)
     const now = new Date();
@@ -70,6 +72,14 @@ document.addEventListener('DOMContentLoaded', () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
+
+    alert('완료되었습니다!');
+    resultDiv.textContent = '완료되었습니다!';
+    form.reset();
+    roomButtons.forEach(b => b.classList.remove('selected'));
+    difficultyButtons.forEach(b => b.classList.remove('selected'));
+    submitBtn.disabled = false;
+  });
 
     alert('예약 요청이 전송되었습니다!');
     resultDiv.textContent = '예약 요청이 전송되었습니다!';
