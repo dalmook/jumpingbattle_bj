@@ -1,5 +1,5 @@
 // Google Apps Script 웹앱 URL
-const SCRIPT_URL = 'https://script.google.com/macros/s/WEB_APP_ID/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzipZuXK7nkBfcbt72zkptUG_93szMKnhddCGAnSmOJN9BadSS72Vj1JZFg9O1gvs_N5w/exec';
 
 // 중복 확인용 GET (doGet 구현 필요)
 async function fetchExistingBookings(slotStr) {
