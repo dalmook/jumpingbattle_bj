@@ -25,16 +25,18 @@
         <input type="hidden" id="difficulty" name="difficulty" required>
       </div>
       <div class="field">
-        <label for="contact">연락처 (옵션, 숫자만 10~11자리)</label>
-        <input type="text" id="contact" name="contact" placeholder="01041668764"
-               pattern="[0-9]{10,11}" maxlength="11"
-               oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+        <label>성인 인원</label>
+        <input type="number" id="adultCount" name="adultCount" min="0" placeholder="0" required>
+      </div>
+      <div class="field">
+        <label>청소년 인원</label>
+        <input type="number" id="youthCount" name="youthCount" min="0" placeholder="0" required>
       </div>
       <div class="field">
         <label for="vehicle">차량번호 뒤 4자리 (옵션)</label>
         <input type="text" id="vehicle" name="vehicle" placeholder="3456"
                pattern="[0-9]{4}" maxlength="4"
-               oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0,4)">
+               oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,4)">
       </div>
       <button type="submit">예약하기</button>
     </form>
