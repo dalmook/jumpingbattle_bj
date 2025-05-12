@@ -8,7 +8,6 @@
 </head>
 <body>
   <div class="container">
-    
     <form id="reservationForm" novalidate>
       <!-- 워크인 가능시간 (hidden) -->
       <input type="hidden" id="walkInTime" name="walkInTime">
@@ -18,6 +17,7 @@
         <label for="teamName">팀명</label>
         <input type="text" id="teamName" name="teamName" placeholder="팀명을 입력하세요" required>
       </div>
+
       <!-- 방 크기 -->
       <div class="field room-group">
         <span>방 크기</span>
@@ -29,7 +29,8 @@
         </div>
         <input type="hidden" id="roomSize" name="roomSize" required>
       </div>
-      <!-- 인원 입력 --> (성인/청소년) -->
+
+      <!-- 인원 입력 -->
       <div class="field-group">
         <div class="field half">
           <label for="adultCount">성인 인원</label>
@@ -56,7 +57,7 @@
       <!-- 차량번호 -->
       <div class="field">
         <label for="vehicle">차량번호 뒤 4자리 (옵션)</label>
-        <input type="number" id="vehicle" name="vehicle" placeholder="3456"
+        <input type="text" id="vehicle" name="vehicle" placeholder="3456"
                pattern="\d{4}" maxlength="4"
                oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,4)"
                title="숫자 4자리만 입력 가능합니다">
