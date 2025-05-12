@@ -11,19 +11,7 @@
     <h1>점핑배틀</h1>
     <form id="reservationForm" novalidate>
       <!-- 워크인 가능시간 -->
-      <input type="hidden" id="walkInTime" name="walkInTime">
-      
-      <!-- 난이도 -->
-      <div class="field difficulty-group">
-        <span>난이도</span>
-        <div class="difficulty-buttons">
-          <button type="button" data-value="ㅂ베이직">베이직</button>
-          <button type="button" data-value="ㅇ이지">이지</button>
-          <button type="button" data-value="ㄴ노멀">노멀</button>
-          <button type="button" data-value="ㅎ하드">하드</button>
-        </div>
-        <input type="hidden" id="difficulty" name="difficulty" required>
-      </div>
+      <input type="hidden" id="walkInTime" name="walkInTime">    
       
       <!-- 팀명 -->
       <div class="field">
@@ -42,6 +30,18 @@
           <input type="number" id="youthCount" name="youthCount" min="0" placeholder="0" required>
         </div>
       </div>
+
+      <!-- 난이도 -->
+      <div class="field difficulty-group">
+        <span>난이도</span>
+        <div class="difficulty-buttons">
+          <button type="button" data-value="ㅂ베이직">베이직</button>
+          <button type="button" data-value="ㅇ이지">이지</button>
+          <button type="button" data-value="ㄴ노멀">노멀</button>
+          <button type="button" data-value="ㅎ하드">하드</button>
+        </div>
+        <input type="hidden" id="difficulty" name="difficulty" required>
+      </div>      
 
       <!-- 차량번호 -->
       <div class="field">
