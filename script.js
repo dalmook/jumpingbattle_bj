@@ -1,4 +1,4 @@
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwM-p-NhwFB5cqR4Zi6i0ALzOKYNyK9oRQ0qu59k9ydDDeTR5qNns31y-eMyWqG5eTCNg/exec'
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzSTHnxW2hVB_E48CBD_PRziTK-kwgy8Qaz-Enkl8fpI6yT9F8YMkwT-eIquMDIphDK4Q/exec'
 
 document.addEventListener('DOMContentLoaded', () => {
   // 난이도 버튼 설정
