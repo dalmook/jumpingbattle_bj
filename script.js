@@ -1,4 +1,4 @@
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyqpSWHiJ1SDCw8uBBQEogvH0U_qEcupRpzZ34MssWUxPkyz18lyfysQX74z4csv7sZtQ/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzhN8oog51UuUbFR-Sh1iG5KOLPDl5wvXGsiLxT-licL2okcTaIVnw9yKZtFcGXVffQ7A/exec';
 
 document.addEventListener('DOMContentLoaded', () => {
   const walkInInput = document.getElementById('walkInTime');
