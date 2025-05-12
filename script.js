@@ -1,5 +1,5 @@
 // Google Apps Script 웹앱 URL
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwJWrRrcSlTYE4QydrckdQWwbJTmbyntdNlgbRVloAU7bAaBSPxA56CbccGY7Yrnp9xLw/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/WEB_APP_ID/exec';
 
 document.addEventListener('DOMContentLoaded', () => {
   const walkInInput = document.getElementById('walkInTime');
@@ -34,9 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // 최종 확인 팝업
     if (!confirm('입력한 정보가 맞습니까?')) return;
 
-    // 필수 입력 확인
-    if (!roomInput.value) { alert('방 크기를 선택해주세요.'); return; }
-    if (!difficultyInput.value) { alert('난이도를 선택해주세요.'); return; }
+        // 필수 입력 확인 (팀명 및 인원만 필수)
+    if (!form.teamName.value.trim()) { alert('팀명을 입력해주세요.'); return; }
     const adult = Number(form.adultCount.value);
     const youth = Number(form.youthCount.value);
     const total = adult + youth;
