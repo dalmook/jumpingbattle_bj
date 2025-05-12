@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // 필수 입력 확인 (팀명 및 인원만 필수)
+    // 필수 입력 (팀명, 인원)
     if (!form.teamName.value.trim()) {
       alert('팀명을 입력해주세요.');
       submitBtn.disabled = false;
@@ -67,6 +67,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const slotStr = String(h).padStart(2, '0') + ':' + String(chosen).padStart(2, '0');
     walkInInput.value = slotStr;
 
+    // 즉시 완료 팝업
+    alert('완료되었습니다!');
+
     resultDiv.textContent = '전송 중...';
 
     const payload = {
@@ -80,18 +83,18 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     console.log('Payload:', payload);
-    await fetch(SCRIPT_URL, {
+    fetch(SCRIPT_URL, {
       method: 'POST',
       mode: 'no-cors',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
+    })
+    .then(() => {
+      resultDiv.textContent = '전송이 완료되었습니다.';
+      form.reset();
+      roomButtons.forEach(b => b.classList.remove('selected'));
+      difficultyButtons.forEach(b => b.classList.remove('selected'));
+      submitBtn.disabled = false;
     });
-
-    alert('완료되었습니다!');
-    resultDiv.textContent = '완료되었습니다!';
-    form.reset();
-    roomButtons.forEach(b => b.classList.remove('selected'));
-    difficultyButtons.forEach(b => b.classList.remove('selected'));
-    submitBtn.disabled = false;
   });
 });
