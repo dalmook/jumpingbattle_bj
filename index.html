@@ -10,16 +10,18 @@
   <div class="container">
     <h1>점핑배틀</h1>
     <form id="reservationForm" novalidate>
-      <!-- 워크인 가능시간 -->
-      <input type="hidden" id="walkInTime" name="walkInTime">    
-      
+      <!-- 워크인 고정값 -->
+      <input type="hidden" id="walkInLabel" name="walkInLabel" value="워크인">
+      <div class="field">
+        <label>유형</label>
+        <input type="text" value="워크인" readonly>
+      </div>
       <!-- 팀명 -->
       <div class="field">
         <label for="teamName">팀명</label>
         <input type="text" id="teamName" name="teamName" placeholder="팀명을 입력하세요" required>
       </div>
-
-      <!-- 인원 입력 -->
+      <!-- 인원 입력 (성인/청소년) -->
       <div class="field-group">
         <div class="field half">
           <label for="adultCount">성인 인원</label>
@@ -30,7 +32,6 @@
           <input type="number" id="youthCount" name="youthCount" min="0" placeholder="0" required>
         </div>
       </div>
-
       <!-- 난이도 -->
       <div class="field difficulty-group">
         <span>난이도</span>
@@ -41,17 +42,15 @@
           <button type="button" data-value="ㅎ하드">하드</button>
         </div>
         <input type="hidden" id="difficulty" name="difficulty" required>
-      </div>      
-
+      </div>
       <!-- 차량번호 -->
       <div class="field">
         <label for="vehicle">차량번호 뒤 4자리 (옵션)</label>
-        <input type="number" id="vehicle" name="vehicle" placeholder="3456"
+        <input type="text" id="vehicle" name="vehicle" placeholder="3456"
                pattern="\d{4}" maxlength="4"
                oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,4)"
                title="숫자 4자리만 입력 가능합니다">
       </div>
-
       <!-- 제출 버튼 -->
       <button type="submit">전송하기</button>
     </form>
