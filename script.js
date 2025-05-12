@@ -1,18 +1,5 @@
 // Google Apps Script 웹앱 URL
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzipZuXK7nkBfcbt72zkptUG_93szMKnhddCGAnSmOJN9BadSS72Vj1JZFg9O1gvs_N5w/exec';
-
-// 중복 확인용 GET (doGet 구현 필요)
-async function fetchExistingBookings(slotStr) {
-  try {
-    const res = await fetch(`${SCRIPT_URL}?action=list&time=${slotStr}`, { method: 'GET', mode: 'cors' });
-    if (!res.ok) throw new Error(`GET 오류: ${res.status}`);
-    const data = await res.json();
-    return data.bookings || [];
-  } catch (err) {
-    console.error('예약 조회 오류:', err);
-    return [];
-  }
-}
+const SCRIPT_URL = 'https://script.google.com/macros/s/WEB_APP_ID/exec';
 
 document.addEventListener('DOMContentLoaded', () => {
   const walkInInput = document.getElementById('walkInTime');
@@ -23,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('reservationForm');
   const resultDiv = document.getElementById('result');
 
-  // 단일 선택: 방 크기
+  // 방 크기 단일 선택
   roomButtons.forEach(btn => {
     btn.addEventListener('click', () => {
       roomButtons.forEach(b => b.classList.remove('selected'));
@@ -32,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 단일 선택: 난이도
+  // 난이도 단일 선택
   difficultyButtons.forEach(btn => {
     btn.addEventListener('click', () => {
       difficultyButtons.forEach(b => b.classList.remove('selected'));
@@ -41,54 +28,29 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 예약 가능 방 갱신
-  async function updateRoomAvailability(slotStr) {
-    if (!slotStr) return;
-    const bookings = await fetchExistingBookings(slotStr);
-    roomButtons.forEach(btn => {
-      const disabled = bookings.some(b => b.walkInTime === slotStr && b.roomSize === btn.dataset.value);
-      btn.disabled = disabled;
-      btn.classList.toggle('disabled', disabled);
-    });
-  }
-
-  form.addEventListener('submit', async e => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    // 슬롯 계산
+    // 최종 확인 팝업
+    if (!confirm('입력한 정보가 맞습니까?')) return;
+
+    // 필수 입력 확인
+    if (!roomInput.value) { alert('방 크기를 선택해주세요.'); return; }
+    if (!difficultyInput.value) { alert('난이도를 선택해주세요.'); return; }
+    const adult = Number(form.adultCount.value);
+    const youth = Number(form.youthCount.value);
+    const total = adult + youth;
+    if (total <= 0) { alert('인원 수를 입력해주세요.'); return; }
+
+    // 슬롯 계산 (00,20,40 기준, 3분 초과 시 다음 슬롯)
     const now = new Date();
     let h = now.getHours();
     const m = now.getMinutes();
     const slots = [0, 20, 40];
     let chosen = slots.find(s => m <= s + 3);
     if (chosen === undefined) { h = (h + 1) % 24; chosen = 0; }
-    const slotStr = String(h).padStart(2,'0') + ':' + String(chosen).padStart(2,'0');
+    const slotStr = `${String(h).padStart(2,'0')}:${String(chosen).padStart(2,'0')}`;
     walkInInput.value = slotStr;
-
-    // 방 중복 검사
-    await updateRoomAvailability(slotStr);
-    if (!roomInput.value) {
-      alert('방 크기를 선택해주세요.');
-      return;
-    }
-    if (document.querySelector('.room-buttons button.selected.disabled')) {
-      alert('이미 예약된 방입니다.');
-      return;
-    }
-
-    // 필수 입력 체크
-    if (!difficultyInput.value) {
-      alert('난이도를 선택해주세요.');
-      return;
-    }
-    const adult = Number(form.adultCount.value);
-    const youth = Number(form.youthCount.value);
-    const total = adult + youth;
-    if (total <= 0) {
-      alert('인원 수를 입력해주세요.');
-      return;
-    }
-    if (!confirm('입력한 정보가 맞습니까?')) return;
 
     resultDiv.textContent = '전송 중...';
 
@@ -113,12 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
     alert('예약 요청이 전송되었습니다!');
     resultDiv.textContent = '예약 요청이 전송되었습니다!';
     form.reset();
-    roomButtons.forEach(b => b.classList.remove('selected', 'disabled'));
+    roomButtons.forEach(b => b.classList.remove('selected'));
     difficultyButtons.forEach(b => b.classList.remove('selected'));
-  });
-
-  // 초점 이동 시 방 가용성 업데이트
-  ['adultCount', 'youthCount'].forEach(id => {
-    document.getElementById(id).addEventListener('focus', () => updateRoomAvailability(walkInInput.value));
   });
 });
