@@ -10,16 +10,16 @@
   <div class="container">
     <h1>점핑배틀</h1>
     <form id="reservationForm" novalidate>
-      <!-- 워크인 가능시간 (hidden) -->
-      <input type="hidden" id="walkInTime" name="walkInTime">
-
+      <!-- 워크인 가능시간 -->
+      <input type="hidden" id="walkInTime" name="walkInTime">    
+      
       <!-- 팀명 -->
       <div class="field">
         <label for="teamName">팀명</label>
         <input type="text" id="teamName" name="teamName" placeholder="팀명을 입력하세요" required>
       </div>
 
-      <!-- 인원 입력 (성인/청소년) -->
+      <!-- 인원 입력 -->
       <div class="field-group">
         <div class="field half">
           <label for="adultCount">성인 인원</label>
@@ -41,7 +41,7 @@
           <button type="button" data-value="ㅎ하드">하드</button>
         </div>
         <input type="hidden" id="difficulty" name="difficulty" required>
-      </div>
+      </div>      
 
       <!-- 차량번호 -->
       <div class="field">
