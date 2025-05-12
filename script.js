@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
     walkInInput.value = slotStr;
 
     // 즉시 완료
-    alert('완료되었습니다! 실내화로 갈아신고, 짐은 락커에 보관 후 오시면 안내해 드리겠습니다.^^');
+    alert('완료되었습니다!\n 1. 실내화로 갈아신고, \n 2. 짐은 락커에 보관 후 \n 3. 발목 한번 푸시고 \n 4. 카운터로 오시면 안내해 드리겠습니다.^^');
     resultDiv.textContent = '전송 중...';
 
     const payload = {
