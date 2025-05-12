@@ -1,73 +1,60 @@
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background: linear-gradient(135deg, #00B4DB, #0083B0);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-.container {
-  background: #fff;
-  padding: 20px 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-  width: 360px;
-  text-align: center;
-  max-height: 100vh;
-  overflow-y: auto;
-}
-.field, .field-group {
-  margin-bottom: 16px;
-  text-align: left;
-}
-.field label, .field span {
-  display: block;
-  margin-bottom: 6px;
-  font-weight: 600;
-  color: #555;
-}
-.field input {
-  width: 100%;
-  padding: 10px 12px;
-  font-size: 1rem;
-  border: 2px solid #ddd;
-  border-radius: 6px;
-  transition: border-color 0.2s;
-}
-.field input:focus {
-  border-color: #0083B0;
-  outline: none;
-}
-.room-buttons, .difficulty-buttons {
-  display: flex;
-  gap: 8px;
-}
-.room-buttons button, .difficulty-buttons button {
-  flex: 1;
-  padding: 10px;
-  background: #f4f4f4;
-  border: 2px solid #ddd;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.2s, border-color 0.2s;
-}
-.room-buttons button.selected { background: #28a745; color: #fff; border-color: #1e7e34; }
-.difficulty-buttons button.selected { background: #0083B0; color: #fff; border-color: #005f7f; }
-.field-group { display: flex; gap: 12px; }
-.field-group .half { flex: 1; }
-button[type="submit"] {
-  width: 100%;
-  padding: 12px;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #fff;
-  background-color: #0083B0;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-button[type="submit"]:hover { background-color: #005f7f; }
-.result { margin-top: 20px; font-size: 0.95rem; color: #0077a3; }
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>점핑배틀</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <form id="reservationForm" novalidate>
+      <input type="hidden" id="walkInTime" name="walkInTime">
+      <div class="field">
+        <label for="teamName">팀명</label>
+        <input type="text" id="teamName" name="teamName" placeholder="팀명을 입력하세요" required>
+      </div>
+      <div class="field room-group">
+        <span>방 크기</span>
+        <div class="room-buttons">
+          <button type="button" data-value="B1">대형 (B1)</button>
+          <button type="button" data-value="A1">중형 (A1)</button>
+          <button type="button" data-value="C1">소형 (C1)</button>
+          <button type="button" data-value="C2">소형 (C2)</button>
+        </div>
+        <input type="hidden" id="roomSize" name="roomSize" required>
+      </div>
+      <div class="field-group">
+        <div class="field half">
+          <label for="adultCount">성인 인원</label>
+          <input type="number" id="adultCount" name="adultCount" min="0" placeholder="0" required>
+        </div>
+        <div class="field half">
+          <label for="youthCount">청소년 인원</label>
+          <input type="number" id="youthCount" name="youthCount" min="0" placeholder="0" required>
+        </div>
+      </div>
+      <div class="field difficulty-group">
+        <span>난이도</span>
+        <div class="difficulty-buttons">
+          <button type="button" data-value="ㅂ베이직">베이직</button>
+          <button type="button" data-value="ㅇ이지">이지</button>
+          <button type="button" data-value="ㄴ노멀">노멀</button>
+          <button type="button" data-value="ㅎ하드">하드</button>
+        </div>
+        <input type="hidden" id="difficulty" name="difficulty" required>
+      </div>
+      <div class="field">
+        <label for="vehicle">차량번호 뒤 4자리 (옵션)</label>
+        <input type="number" id="vehicle" name="vehicle" placeholder="3456"
+               pattern="\d{4}" maxlength="4"
+               oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,4)"
+               title="숫자 4자리만 입력 가능합니다">
+      </div>
+      <button type="submit">전송하기</button>
+    </form>
+    <div id="result" class="result"></div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
