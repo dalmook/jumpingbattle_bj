@@ -1,10 +1,7 @@
 // Google Apps Script 웹앱 URL
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxX0Gsl_t-MtFtN7Ip-ILKKNRriS7AVLo5rdweA_grY8En2xY61JWHtroW9wnbtiNWxZg/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/WEB_APP_ID/exec';
 
 document.addEventListener('DOMContentLoaded', () => {
-  const walkInInput = document.getElementById('walkInTime');
-  const walkInLabel = document.getElementById('walkInLabel');
-  const walkInLabel = document.getElementById('walkInLabel');
   const difficultyInput = document.getElementById('difficulty');
   const buttons = document.querySelectorAll('.difficulty-buttons button');
 
@@ -17,45 +14,43 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 워크인 슬롯 계산
-  function getWalkInSlot() {
-    const now = new Date();
-    let h = now.getHours();
-    const m = now.getMinutes();
-    const slots = [0, 20, 40];
-    let chosen;
-    for (let slot of slots) {
-      if (m <= slot + 3) { chosen = slot; break; }
-    }
-    if (chosen === undefined) { h = (h + 1) % 24; chosen = 0; }
-    const hh = String(h).padStart(2,'0');
-    const mm = String(chosen).padStart(2,'0');
-    walkInInput.value = `${hh}:${mm}`;
-  }
-
   const form = document.getElementById('reservationForm');
   const resultDiv = document.getElementById('result');
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (!confirm('입력한 정보가 맞습니까?')) return;
-    if (!difficultyInput.value) { alert('난이도를 선택해주세요.'); return; }
+
+    if (!difficultyInput.value) {
+      alert('난이도를 선택해주세요.');
+      return;
+    }
+
     const adult = Number(form.adultCount.value);
     const youth = Number(form.youthCount.value);
     const total = adult + youth;
-    if (total <= 0) { alert('인원 수를 입력해주세요.'); return; }
-    getWalkInSlot();
+    if (total <= 0) {
+      alert('인원 수를 입력해주세요.');
+      return;
+    }
+
     resultDiv.textContent = '요청 전송 중...';
+
     const payload = {
-      walkInLabel: walkInLabel.value,
-      walkInTime: walkInInput.value,
       teamName: form.teamName.value.trim(),
       difficulty: difficultyInput.value,
       totalCount: total,
       youthCount: youth,
       vehicle: form.vehicle.value.trim() || ''
     };
-    await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type':'application/json' }, body: JSON.stringify(payload) });
+
+    await fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
     alert('예약 요청이 전송되었습니다!');
     resultDiv.textContent = '예약 요청이 전송되었습니다!';
     form.reset();
