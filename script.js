@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // 필수 입력 검사
+    // 필수 검사
     const teamName = form.teamName.value.trim();
     const adult = Number(form.adultCount.value);
     const youth = Number(form.youthCount.value);
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const slots = [0, 20, 40];
     let chosen = slots.find(s => m <= s + 3);
     if (chosen === undefined) { h = (h + 1) % 24; chosen = 0; }
-    const slotStr = `${String(h).padStart(2,'0')}:${String(chosen).padStart(2,'0')}`;
+    const slotStr = String(h).padStart(2,'0') + ':' + String(chosen).padStart(2,'0');
     walkInInput.value = slotStr;
 
     // payload 준비
@@ -72,6 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // 전송 시작
+    resultDiv.textContent = '전송 중...';
     const sendPromise = fetch(SCRIPT_URL, {
       method: 'POST',
       mode: 'no-cors',
@@ -79,23 +80,20 @@ document.addEventListener('DOMContentLoaded', () => {
       body: JSON.stringify(payload)
     });
 
-    // 즉시 완료 팝업
-    alert(
-      '완료되었습니다!' +
-      '1. 실내화로 갈아신고,' +
-      '2. 짐은 락커에 보관 후' +
-      '3. 발목 한번 푸시고' +
-      '4. 카운터로 오시면 안내해 드리겠습니다.^^'
-    );
+    // 즉시 완료 안내 (alert 대신 inline)
+    resultDiv.innerHTML =
+      '완료되었습니다!<br>' +
+      '1. 실내화로 갈아신고,<br>' +
+      '2. 짐은 락커에 보관 후<br>' +
+      '3. 발목 한번 푸시고<br>' +
+      '4. 카운터로 오시면 안내해 드리겠습니다.^^';
 
-    // UI 업데이트
-    resultDiv.textContent = '전송 중...';
+    // 전송 완료 후 후속 처리
     sendPromise.then(() => {
-      resultDiv.textContent = '전송이 완료되었습니다!';
+      submitBtn.disabled = false;
       form.reset();
       roomButtons.forEach(b => b.classList.remove('selected'));
       difficultyButtons.forEach(b => b.classList.remove('selected'));
-      submitBtn.disabled = false;
     });
   });
 });
