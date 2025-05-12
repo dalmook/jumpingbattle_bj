@@ -28,7 +28,7 @@ h1 {
   color: #333;
 }
 .field, .field-group {
-  margin-bottom: 16px;
+  margin-bottom: 10px;
   text-align: left;
 }
 .field label, .field span {
