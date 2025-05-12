@@ -24,19 +24,22 @@
         </div>
         <input type="hidden" id="difficulty" name="difficulty" required>
       </div>
-      <div class="field">
-        <label>성인 인원</label>
-        <input type="number" id="adultCount" name="adultCount" min="0" placeholder="0" required>
-      </div>
-      <div class="field">
-        <label>청소년 인원</label>
-        <input type="number" id="youthCount" name="youthCount" min="0" placeholder="0" required>
+      <div class="field-group">
+        <div class="field half">
+          <label for="adultCount">성인 인원</label>
+          <input type="number" id="adultCount" name="adultCount" min="0" placeholder="0" required>
+        </div>
+        <div class="field half">
+          <label for="youthCount">청소년 인원</label>
+          <input type="number" id="youthCount" name="youthCount" min="0" placeholder="0" required>
+        </div>
       </div>
       <div class="field">
         <label for="vehicle">차량번호 뒤 4자리 (옵션)</label>
         <input type="text" id="vehicle" name="vehicle" placeholder="3456"
-               pattern="[0-9]{4}" maxlength="4"
-               oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,4)">
+               pattern="\d{4}" maxlength="4"
+               oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,4)"
+               title="숫자 4자리만 입력 가능합니다">
       </div>
       <button type="submit">예약하기</button>
     </form>
