@@ -10,10 +10,12 @@
   <div class="container">
     <h1>점핑배틀</h1>
     <form id="reservationForm" novalidate>
+      <!-- 팀명 -->
       <div class="field">
         <label for="teamName">팀명</label>
         <input type="text" id="teamName" name="teamName" placeholder="팀명을 입력하세요" required>
       </div>
+      <!-- 난이도 -->
       <div class="field difficulty-group">
         <span>난이도</span>
         <div class="difficulty-buttons">
@@ -24,6 +26,7 @@
         </div>
         <input type="hidden" id="difficulty" name="difficulty" required>
       </div>
+      <!-- 인원 입력 -->
       <div class="field-group">
         <div class="field half">
           <label for="adultCount">성인 인원</label>
@@ -34,6 +37,7 @@
           <input type="number" id="youthCount" name="youthCount" min="0" placeholder="0" required>
         </div>
       </div>
+      <!-- 차량번호 -->
       <div class="field">
         <label for="vehicle">차량번호 뒤 4자리 (옵션)</label>
         <input type="text" id="vehicle" name="vehicle" placeholder="3456"
@@ -41,6 +45,7 @@
                oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,4)"
                title="숫자 4자리만 입력 가능합니다">
       </div>
+      <!-- 제출 버튼 -->
       <button type="submit">전송하기</button>
     </form>
     <div id="result" class="result"></div>
