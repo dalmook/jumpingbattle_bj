@@ -1,13 +1,10 @@
-// Google Apps Script 웹앱 URL
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwOjahpenBZCe33uop_MC6l_RnsAXN7LJTuQeOV9lSZ4enxU71owaRpZ7fFtXJJyL6bOQ/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwlFqNp21C_XWLD1AANZXycaLixJjISqn-te6t5iSgxUktfmIEldGq-4PjKpLgUMokjvA/exec'
 
 document.addEventListener('DOMContentLoaded', () => {
   const walkInInput = document.getElementById('walkInTime');
-  const walkInLabel = document.getElementById('walkInLabel');
   const difficultyInput = document.getElementById('difficulty');
   const buttons = document.querySelectorAll('.difficulty-buttons button');
 
-  // 난이도 버튼 선택
   buttons.forEach(btn => {
     btn.addEventListener('click', () => {
       buttons.forEach(b => b.classList.remove('selected'));
@@ -27,9 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (m <= slot + 3) { chosen = slot; break; }
     }
     if (chosen === undefined) { h = (h + 1) % 24; chosen = 0; }
-    const hh = String(h).padStart(2,'0');
-    const mm = String(chosen).padStart(2,'0');
-    walkInInput.value = `${hh}:${mm}`;
+    walkInInput.value = `${String(h).padStart(2,'0')}:${String(chosen).padStart(2,'0')}`;
   }
 
   const form = document.getElementById('reservationForm');
@@ -46,7 +41,6 @@ document.addEventListener('DOMContentLoaded', () => {
     getWalkInSlot();
     resultDiv.textContent = '요청 전송 중...';
     const payload = {
-      walkInLabel: walkInLabel.value,
       walkInTime: walkInInput.value,
       teamName: form.teamName.value.trim(),
       difficulty: difficultyInput.value,
@@ -58,6 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
     alert('예약 요청이 전송되었습니다!');
     resultDiv.textContent = '예약 요청이 전송되었습니다!';
     form.reset();
-    buttons.forEach(b => b.classList.remove('selected'));
+    buttons.forEach(b=>b.classList.remove('selected'));
   });
 });
