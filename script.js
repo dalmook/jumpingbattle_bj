@@ -1,5 +1,5 @@
 // Google Apps Script 웹앱 URL
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzrHkwO0wqBf6VzgMRwtyqebq5CvvQsryUU0l1xjW2g1f19wNlhYOaOER03xUh64g__uQ/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/WEB_APP_ID/exec';
 
 // 중복 확인용 GET (doGet 구현 필요)
 async function fetchExistingBookings(slotStr) {
@@ -24,18 +24,22 @@ document.addEventListener('DOMContentLoaded', () => {
   const resultDiv = document.getElementById('result');
 
   // 단일 선택: 방 크기
-  roomButtons.forEach(btn => btn.addEventListener('click', () => {
-    roomButtons.forEach(b => b.classList.remove('selected'));
-    btn.classList.add('selected');
-    roomInput.value = btn.dataset.value;
-  }));
+  roomButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      roomButtons.forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      roomInput.value = btn.dataset.value;
+    });
+  });
 
   // 단일 선택: 난이도
-  difficultyButtons.forEach(btn => btn.addEventListener('click', () => {
-    difficultyButtons.forEach(b => b.classList.remove('selected'));
-    btn.classList.add('selected');
-    difficultyInput.value = btn.dataset.value;
-  }));
+  difficultyButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      difficultyButtons.forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      difficultyInput.value = btn.dataset.value;
+    });
+  });
 
   // 예약 가능 방 갱신
   async function updateRoomAvailability(slotStr) {
@@ -52,29 +56,69 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
 
     // 슬롯 계산
-    const now = new Date(); let h=now.getHours(); const m=now.getMinutes(); const slots=[0,20,40];
-    let chosen=slots.find(s=>m<=s+3); if(chosen===undefined){h=(h+1)%24;chosen=0;} const slotStr=String(h).padStart(2,'0')+':'+String(chosen).padStart(2,'0');
-    walkInInput.value=slotStr;
+    const now = new Date();
+    let h = now.getHours();
+    const m = now.getMinutes();
+    const slots = [0, 20, 40];
+    let chosen = slots.find(s => m <= s + 3);
+    if (chosen === undefined) { h = (h + 1) % 24; chosen = 0; }
+    const slotStr = String(h).padStart(2,'0') + ':' + String(chosen).padStart(2,'0');
+    walkInInput.value = slotStr;
 
-    // 중복 체크
+    // 방 중복 검사
     await updateRoomAvailability(slotStr);
-    if(!roomInput.value){alert('방 크기를 선택해주세요.');return;}
-    if(document.querySelector('.room-buttons button.selected.disabled')){alert('이미 예약된 방입니다.');return;}
+    if (!roomInput.value) {
+      alert('방 크기를 선택해주세요.');
+      return;
+    }
+    if (document.querySelector('.room-buttons button.selected.disabled')) {
+      alert('이미 예약된 방입니다.');
+      return;
+    }
 
-    if(!difficultyInput.value){alert('난이도를 선택해주세요.');return;}
-    const adult=Number(form.adultCount.value), youth=Number(form.youthCount.value), total=adult+youth;
-    if(total<=0){alert('인원 수를 입력해주세요.');return;}
-    if(!confirm('입력한 정보가 맞습니까?'))return;
+    // 필수 입력 체크
+    if (!difficultyInput.value) {
+      alert('난이도를 선택해주세요.');
+      return;
+    }
+    const adult = Number(form.adultCount.value);
+    const youth = Number(form.youthCount.value);
+    const total = adult + youth;
+    if (total <= 0) {
+      alert('인원 수를 입력해주세요.');
+      return;
+    }
+    if (!confirm('입력한 정보가 맞습니까?')) return;
 
-    resultDiv.textContent='전송 중...';
-    const payload={walkInTime:slotStr,roomSize:roomInput.value,teamName:form.teamName.value.trim(),difficulty:difficultyInput.value,totalCount:total,youthCount:youth,vehicle:form.vehicle.value.trim()||''};
-    console.log('Payload:',payload);
-    await fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    resultDiv.textContent = '전송 중...';
 
-    alert('예약 요청이 전송되었습니다!');resultDiv.textContent='예약 요청이 전송되었습니다!';
-    form.reset();roomButtons.forEach(b=>b.classList.remove('selected','disabled'));difficultyButtons.forEach(b=>b.classList.remove('selected'));
+    const payload = {
+      walkInTime: slotStr,
+      roomSize: roomInput.value,
+      teamName: form.teamName.value.trim(),
+      difficulty: difficultyInput.value,
+      totalCount: total,
+      youthCount: youth,
+      vehicle: form.vehicle.value.trim() || ''
+    };
+
+    console.log('Payload:', payload);
+    await fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    alert('예약 요청이 전송되었습니다!');
+    resultDiv.textContent = '예약 요청이 전송되었습니다!';
+    form.reset();
+    roomButtons.forEach(b => b.classList.remove('selected', 'disabled'));
+    difficultyButtons.forEach(b => b.classList.remove('selected'));
   });
 
-  // focus 시 방 상태 갱신
-  ['adultCount','youthCount'].forEach(id=>document.getElementById(id).addEventListener('focus',()=>updateRoomAvailability(walkInInput.value)));
+  // 초점 이동 시 방 가용성 업데이트
+  ['adultCount', 'youthCount'].forEach(id => {
+    document.getElementById(id).addEventListener('focus', () => updateRoomAvailability(walkInInput.value));
+  });
 });
