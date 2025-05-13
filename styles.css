@@ -53,6 +53,7 @@ input[type="text"], input[type="number"] {
   gap: 8px;
 }
 .room-buttons button, .difficulty-buttons button {
+  font-size: 1.1rem; /* 폰트 크기 조정 */
   flex: 1;
   padding: 8px 0;
   background: #fff;
