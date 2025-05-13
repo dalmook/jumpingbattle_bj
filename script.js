@@ -85,12 +85,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const youthAmount = youth * 5000;
     const totalAmount = adultAmount + youthAmount;
     resultDiv.innerHTML =
-      `결제 금액 안내 <br>` +
-      `<strong style="font-size:1.2em;">총 금액 = ${totalAmount.toLocaleString()}원</strong>`; +      
+      `결제 금액 안내<br>` +
+      `<strong style="font-size:1.2em;">총 금액 = ${totalAmount.toLocaleString()}원</strong>` +
       `성인 ${adult}명 × 7,000원 = ${adultAmount.toLocaleString()}원<br>` +
-      `청소년 ${youth}명 × 5,000원 = ${youthAmount.toLocaleString()}원<br>`;
-
-
+      `청소년 ${youth}명 × 5,000원 = ${youthAmount.toLocaleString()}원<br>`;">총 금액 = ${totalAmount.toLocaleString()}원</strong>`;
 
     // 전송 완료 후 후속 처리
     sendPromise.then(() => {
