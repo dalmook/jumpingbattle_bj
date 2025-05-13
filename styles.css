@@ -1,77 +1,84 @@
-* { box-sizing: border-box; }
 body {
   margin: 0;
+  padding: 0;
+  background: url('jumpingbattle_character_bg.jpg') no-repeat top center;
+  background-size: cover;
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background: linear-gradient(135deg, #00B4DB, #0083B0);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  align-items: flex-start;
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
 }
 .container {
-  background: #fff;
-  padding: 20px 30px;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255,255,255,0.95);
+  padding: 20px;
+  margin-top: 10px;
   border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-  width: 360px;
-  text-align: center;
-  max-height: 100vh;
-  overflow-y: auto;
+  z-index: 1;
 }
 .field, .field-group {
   margin-bottom: 16px;
-  text-align: left;
 }
-.field label, .field span {
+label {
   display: block;
   margin-bottom: 6px;
   font-weight: 600;
-  color: #555;
+  color: #333;
 }
-.field input {
+input[type="text"], input[type="number"] {
   width: 100%;
-  padding: 10px 12px;
+  padding: 8px;
   font-size: 1rem;
-  border: 2px solid #ddd;
+  border: 1px solid #ccc;
   border-radius: 6px;
-  transition: border-color 0.2s;
+  box-sizing: border-box;
 }
-.field input:focus {
-  border-color: #0083B0;
-  outline: none;
-}
+.field-group { display: flex; gap: 4%; }
+.field-group .half { width: 48%; }
 .room-buttons, .difficulty-buttons {
   display: flex;
   gap: 8px;
 }
-.room-buttons button,
-.difficulty-buttons button {
-  width: 22%; /* 버튼 크기 통일 */
-  display: inline-block;
-  text-align: center;
+.room-buttons button, .difficulty-buttons button {
   flex: 1;
-  padding: 10px;
-  background: #f4f4f4;
+  padding: 8px 0;
+  background: #fff;
   border: 2px solid #ddd;
   border-radius: 6px;
+  font-weight: 600;
+  color: #333;
   cursor: pointer;
-  transition: background 0.2s, border-color 0.2s;
+  transition: background 0.2s;
 }
-.room-buttons button.selected { background: #28a745; color: #fff; border-color: #1e7e34; }
-.difficulty-buttons button.selected { background: #0083B0; color: #fff; border-color: #005f7f; }
-.field-group { display: flex; gap: 12px; }
-.field-group .half { flex: 1; }
+.room-buttons button.selected, .difficulty-buttons button.selected {
+  background: #007ACC;
+  color: #fff;
+  border-color: #005A9E;
+}
 button[type="submit"] {
   width: 100%;
   padding: 12px;
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 600;
   color: #fff;
-  background-color: #0083B0;
+  background: #28A745;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background 0.3s;
 }
-button[type="submit"]:hover { background-color: #005f7f; }
-.result { margin-top: 20px; font-size: 0.95rem; color: #0077a3; }
+button[type="submit"]:hover { background: #218838; }
+button[type="submit"]:disabled { background: #888; cursor: not-allowed; }
+.result {
+  margin-top: 16px;
+  font-size: 1rem;
+  color: #333;
+  min-height: 2em;
+}
