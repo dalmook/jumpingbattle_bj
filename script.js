@@ -80,13 +80,16 @@ document.addEventListener('DOMContentLoaded', () => {
       body: JSON.stringify(payload)
     });
 
-    // 즉시 완료 안내 (alert 대신 inline)
+        // 결제 금액 안내 계산
+    const adultAmount = adult * 7000;
+    const youthAmount = youth * 5000;
+    const totalAmount = adultAmount + youthAmount;
     resultDiv.innerHTML =
-      '완료되었습니다!<br>' +
-      '1. 실내화로 갈아신고,<br>' +
-      '2. 짐은 락커에 보관 후<br>' +
-      '3. 발목 한번 푸시고<br>' +
-      '4. 카운터로 오시면 안내해 드리겠습니다.^^';
+      `결제 금액 안내:<br>` +
+      `성인 ${adult}명 × 7,000원 = ${adultAmount.toLocaleString()}원<br>` +
+      `청소년 ${youth}명 × 5,000원 = ${youthAmount.toLocaleString()}원<br>` +
+      `총 금액 = ${totalAmount.toLocaleString()}원`;
+
 
     // 전송 완료 후 후속 처리
     sendPromise.then(() => {
