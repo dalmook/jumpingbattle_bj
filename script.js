@@ -94,6 +94,8 @@ document.addEventListener('DOMContentLoaded', () => {
       form.reset();
       roomButtons.forEach(b => b.classList.remove('selected'));
       difficultyButtons.forEach(b => b.classList.remove('selected'));
+      // 완료 인라인 메시지 제거
+      resultDiv.innerHTML = '';
     });
   });
 });
