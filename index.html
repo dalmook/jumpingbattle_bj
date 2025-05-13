@@ -12,8 +12,9 @@
       <input type="hidden" id="walkInTime" name="walkInTime">
       <div class="field">
         <label for="teamName">팀명</label>
-        <input type="text" id="teamName" name="teamName" placeholder="팀명을 입력하세요" required>
+        <input type="text" id="teamName" name="teamName" required placeholder="팀명을 입력하세요">
       </div>
+
       <div class="field room-group">
         <span>방 크기</span>
         <div class="room-buttons">
@@ -22,18 +23,20 @@
           <button type="button" data-value="C1">소형 (C1)</button>
           <button type="button" data-value="C2">소형 (C2)</button>
         </div>
-        <input type="hidden" id="roomSize" name="roomSize" required>
+        <input type="hidden" id="roomSize" name="roomSize">
       </div>
+
       <div class="field-group">
         <div class="field half">
-          <label for="adultCount">성인 인원</label>
+          <label for="adultCount">성인</label>
           <input type="number" id="adultCount" name="adultCount" min="0" placeholder="0" required>
         </div>
         <div class="field half">
-          <label for="youthCount">청소년 인원</label>
+          <label for="youthCount">청소년</label>
           <input type="number" id="youthCount" name="youthCount" min="0" placeholder="0" required>
         </div>
       </div>
+
       <div class="field difficulty-group">
         <span>난이도</span>
         <div class="difficulty-buttons">
@@ -42,15 +45,16 @@
           <button type="button" data-value="ㄴ노멀">노멀</button>
           <button type="button" data-value="ㅎ하드">하드</button>
         </div>
-        <input type="hidden" id="difficulty" name="difficulty" required>
+        <input type="hidden" id="difficulty" name="difficulty">
       </div>
+
       <div class="field">
-        <label for="vehicle">차량번호 뒤 4자리 (옵션)</label>
-        <input type="number" id="vehicle" name="vehicle" placeholder="3456"
-               pattern="\d{4}" maxlength="4"
+        <label for="vehicle">차량번호 (뒤 4자리)</label>
+        <input type="text" id="vehicle" name="vehicle" maxlength="4"
                oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,4)"
-               title="숫자 4자리만 입력 가능합니다">
+               placeholder="예: 1234">
       </div>
+
       <button type="submit">전송하기</button>
     </form>
     <div id="result" class="result"></div>
