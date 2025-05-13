@@ -40,70 +40,50 @@ document.addEventListener('DOMContentLoaded', () => {
     const adult = Number(form.adultCount.value);
     const youth = Number(form.youthCount.value);
     if (!teamName) {
-      alert('팀명을 입력해주세요.');
-      submitBtn.disabled = false;
-      return;
+      alert('팀명을 입력해주세요.'); submitBtn.disabled = false; return;
     }
     if (adult + youth <= 0) {
-      alert('인원 수를 입력해주세요.');
-      submitBtn.disabled = false;
-      return;
+      alert('인원 수를 입력해주세요.'); submitBtn.disabled = false; return;
     }
 
-    // 슬롯 계산 (00,20,40 기준, 3분 초과 시 다음 슬롯)
+    // 슬롯 계산
     const now = new Date();
     let h = now.getHours();
     const m = now.getMinutes();
     const slots = [0, 20, 40];
     let chosen = slots.find(s => m <= s + 3);
     if (chosen === undefined) { h = (h + 1) % 24; chosen = 0; }
-    const slotStr = String(h).padStart(2,'0') + ':' + String(chosen).padStart(2,'0');
+    const slotStr = `${String(h).padStart(2,'0')}:${String(chosen).padStart(2,'0')}`;
     walkInInput.value = slotStr;
 
     // payload 준비
-    const payload = {
-      walkInTime: slotStr,
-      roomSize: roomInput.value,
-      teamName,
-      difficulty: difficultyInput.value,
-      totalCount: adult + youth,
-      youthCount: youth,
-      vehicle: form.vehicle.value.trim() || ''
-    };
+    const payload = { walkInTime: slotStr, roomSize: roomInput.value, teamName,
+      difficulty: difficultyInput.value, totalCount: adult + youth,
+      youthCount: youth, vehicle: form.vehicle.value.trim() || '' };
 
     // 전송 시작
     resultDiv.textContent = '전송 중...';
     const sendPromise = fetch(SCRIPT_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
+      method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
 
-        // 결제 금액 안내 계산
-    const adultAmount = adult * 7000;
-    const youthAmount = youth * 5000;
-    const totalAmount = adultAmount + youthAmount;
-        // 결제 금액 안내 계산 및 표시
+    // 결제 금액 안내
     const adultAmount = adult * 7000;
     const youthAmount = youth * 5000;
     const totalAmount = adultAmount + youthAmount;
     resultDiv.innerHTML =
-      `결제 금액 안내<br>` +
-      `<strong style="font-size:1.2em;">총 금액 = ${totalAmount.toLocaleString()}원</strong>` +
+      `결제 금액 안내<br><strong style="font-size:1.2em; color:#d32f2f;">총 금액 = ${totalAmount.toLocaleString()}원</strong><br>` +
       `성인 ${adult}명 × 7,000원 = ${adultAmount.toLocaleString()}원<br>` +
-      `청소년 ${youth}명 × 5,000원 = ${youthAmount.toLocaleString()}원<br>`;">총 금액 = ${totalAmount.toLocaleString()}원</strong>`;
+      `청소년 ${youth}명 × 5,000원 = ${youthAmount.toLocaleString()}원<br>`;
 
-
-    // 전송 완료 후 후속 처리
+    // 전송 완료 후
     sendPromise.then(() => {
-      resultDiv.innerHTML = ''; // 금액 안내 제거
+      resultDiv.innerHTML = '';
       submitBtn.disabled = false;
       form.reset();
       roomButtons.forEach(b => b.classList.remove('selected'));
       difficultyButtons.forEach(b => b.classList.remove('selected'));
-      // 완료 인라인 메시지 제거
-      resultDiv.innerHTML = '';
     });
   });
 });
