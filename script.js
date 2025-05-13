@@ -80,15 +80,15 @@ document.addEventListener('DOMContentLoaded', () => {
       body: JSON.stringify(payload)
     });
 
-        // 결제 금액 안내 계산
+    // 즉시 완료 안내 (inline)
     const adultAmount = adult * 7000;
     const youthAmount = youth * 5000;
     const totalAmount = adultAmount + youthAmount;
     resultDiv.innerHTML =
       `결제 금액 안내<br>` +
-      `<strong style="font-size:1.2em;">총 금액 = ${totalAmount.toLocaleString()}원</strong>` +
+      `<strong style="font-size:1.2em; color:#d32f2f;">총 금액 = ${totalAmount.toLocaleString()}원</strong><br>` +
       `성인 ${adult}명 × 7,000원 = ${adultAmount.toLocaleString()}원<br>` +
-      `청소년 ${youth}명 × 5,000원 = ${youthAmount.toLocaleString()}원<br>`;">총 금액 = ${totalAmount.toLocaleString()}원</strong>`;
+      `청소년 ${youth}명 × 5,000원 = ${youthAmount.toLocaleString()}원<br>`;
 
     // 전송 완료 후 후속 처리
     sendPromise.then(() => {
@@ -96,8 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
       form.reset();
       roomButtons.forEach(b => b.classList.remove('selected'));
       difficultyButtons.forEach(b => b.classList.remove('selected'));
-      // 완료 인라인 메시지 제거
-      resultDiv.innerHTML = '';
+      // 메시지 지우거나 다른 안내로 대체하려면 여기에 작성
     });
   });
 });
