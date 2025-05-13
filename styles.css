@@ -15,14 +15,15 @@ body {
   left: 50%;
   transform: translateX(-50%);
   background: rgba(255,255,255,0.95);
-  padding: 20px;
+  padding: 30px;
   margin-top: 10px;
   border-radius: 12px;
-  width: 90%;
-  max-width: 400px;
+  width: 95%;
+  max-width: 600px; /* 태블릿 대응 위해 확대 */
   box-shadow: 0 4px 15px rgba(0,0,0,0.2);
   z-index: 1;
 }
+
 .field, .field-group {
   margin-bottom: 16px;
 }
@@ -38,12 +39,13 @@ label .note {
 }
 input[type="text"], input[type="number"] {
   width: 100%;
-  padding: 8px;
-  font-size: 1rem;
+  padding: 12px;
+  font-size: 1.2rem; /* 폰트 크기 확대 */
   border: 1px solid #ccc;
   border-radius: 6px;
   box-sizing: border-box;
 }
+
 .field-group { display: flex; gap: 4%; }
 .field-group .half { width: 48%; }
 .room-buttons, .difficulty-buttons {
@@ -68,8 +70,8 @@ input[type="text"], input[type="number"] {
 }
 button[type="submit"] {
   width: 100%;
-  padding: 12px;
-  font-size: 1.05rem;
+  padding: 16px;
+  font-size: 1.2rem; /* 버튼 크기 확대 */
   font-weight: 600;
   color: #fff;
   background: #28A745;
@@ -78,6 +80,7 @@ button[type="submit"] {
   cursor: pointer;
   transition: background 0.3s;
 }
+
 button[type="submit"]:hover { background: #218838; }
 button[type="submit"]:disabled { background: #888; cursor: not-allowed; }
 .result {
