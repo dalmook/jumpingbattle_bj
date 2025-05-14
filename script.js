@@ -61,29 +61,31 @@ document.addEventListener('DOMContentLoaded', () => {
       difficulty: difficultyInput.value, totalCount: adult + youth,
       youthCount: youth, vehicle: form.vehicle.value.trim() || '' };
 
-    // 전송 시작
+    // 전송 시작 (전송 결과 기다리지 않음)
     resultDiv.textContent = '전송 중...';
-    const sendPromise = fetch(SCRIPT_URL, {
-      method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' },
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
-
-    // 결제 금액 안내
+    
+    // UI 즉시 갱신: 결제 금액 안내
     const adultAmount = adult * 7000;
     const youthAmount = youth * 5000;
     const totalAmount = adultAmount + youthAmount;
     resultDiv.innerHTML =
-      `결제 금액 안내<br><strong style="font-size:1.2em; color:#d32f2f;">총 금액 = ${totalAmount.toLocaleString()}원</strong><br>` +
+      `결제 금액 안내<br>` +
+      `<strong style="font-size:1.2em; color:#d32f2f;">총 금액 = ${totalAmount.toLocaleString()}원</strong><br>` +
       `성인 ${adult}명 × 7,000원 = ${adultAmount.toLocaleString()}원<br>` +
       `청소년 ${youth}명 × 5,000원 = ${youthAmount.toLocaleString()}원<br>`;
+    
+    // 즉시 폼 초기화 및 버튼 재활성화
+    form.reset();
+    submitBtn.disabled = false;
+    roomButtons.forEach(b => b.classList.remove('selected'));
+    difficultyButtons.forEach(b => b.classList.remove('selected'));
 
-    // 전송 완료 후
-    sendPromise.then(() => {
-      resultDiv.innerHTML = '';
-      submitBtn.disabled = false;
-      form.reset();
-      roomButtons.forEach(b => b.classList.remove('selected'));
-      difficultyButtons.forEach(b => b.classList.remove('selected'));
     });
   });
 });
