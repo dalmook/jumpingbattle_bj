@@ -86,10 +86,14 @@ document.addEventListener('DOMContentLoaded', () => {
       `성인 ${adult}명 × 7,000원 = ${adultAmount.toLocaleString()}원<br>` +
       `청소년 ${youth}명 × 5,000원 = ${youthAmount.toLocaleString()}원<br>`;
 
-    // UI 즉시 초기화 및 버튼 재활성화
-    form.reset();
-    roomButtons.forEach(b => b.classList.remove('selected'));
-    difficultyButtons.forEach(b => b.classList.remove('selected'));
-    submitBtn.disabled = false;
+    // 2초 후 UI 초기화 및 버튼 재활성화
+    setTimeout(() => {
+      // 인라인 메시지 리셋
+      resultDiv.innerHTML = '';
+      form.reset();
+      roomButtons.forEach(b => b.classList.remove('selected'));
+      difficultyButtons.forEach(b => b.classList.remove('selected'));
+      submitBtn.disabled = false;
+    }, 2000);
   });
 });
