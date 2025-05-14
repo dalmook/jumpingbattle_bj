@@ -57,11 +57,17 @@ document.addEventListener('DOMContentLoaded', () => {
     walkInInput.value = slotStr;
 
     // payload 준비
-    const payload = { walkInTime: slotStr, roomSize: roomInput.value, teamName,
-      difficulty: difficultyInput.value, totalCount: adult + youth,
-      youthCount: youth, vehicle: form.vehicle.value.trim() || '' };
+    const payload = {
+      walkInTime: slotStr,
+      roomSize: roomInput.value,
+      teamName,
+      difficulty: difficultyInput.value,
+      totalCount: adult + youth,
+      youthCount: youth,
+      vehicle: form.vehicle.value.trim() || ''
+    };
 
-    // 전송 시작 (전송 결과 기다리지 않음)
+    // 전송 시작 (비동기 백그라운드)
     resultDiv.textContent = '전송 중...';
     fetch(SCRIPT_URL, {
       method: 'POST',
@@ -69,8 +75,8 @@ document.addEventListener('DOMContentLoaded', () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
-    
-    // UI 즉시 갱신: 결제 금액 안내
+
+    // 결제 금액 안내 (즉시)
     const adultAmount = adult * 7000;
     const youthAmount = youth * 5000;
     const totalAmount = adultAmount + youthAmount;
@@ -79,13 +85,11 @@ document.addEventListener('DOMContentLoaded', () => {
       `<strong style="font-size:1.2em; color:#d32f2f;">총 금액 = ${totalAmount.toLocaleString()}원</strong><br>` +
       `성인 ${adult}명 × 7,000원 = ${adultAmount.toLocaleString()}원<br>` +
       `청소년 ${youth}명 × 5,000원 = ${youthAmount.toLocaleString()}원<br>`;
-    
-    // 즉시 폼 초기화 및 버튼 재활성화
+
+    // UI 즉시 초기화 및 버튼 재활성화
     form.reset();
-    submitBtn.disabled = false;
     roomButtons.forEach(b => b.classList.remove('selected'));
     difficultyButtons.forEach(b => b.classList.remove('selected'));
-
-    });
+    submitBtn.disabled = false;
   });
 });
