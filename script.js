@@ -39,11 +39,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const teamName = form.teamName.value.trim();
     const adult = Number(form.adultCount.value);
     const youth = Number(form.youthCount.value);
+    const vehicleVal = form.vehicle.value.trim();
     if (!teamName) {
       alert('팀명을 입력해주세요.'); submitBtn.disabled = false; return;
     }
     if (adult + youth <= 0) {
       alert('인원 수를 입력해주세요.'); submitBtn.disabled = false; return;
+    }
+    if (vehicleVal !== '' && !/^\d{4}$/.test(vehicleVal)) {
+      alert('차량번호는 숫자 네 자리 또는 빈칸으로 입력해주세요.');
+      submitBtn.disabled = false;
+      return;
     }
 
     // 슬롯 계산
