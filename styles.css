@@ -114,16 +114,7 @@ body {
     color: #333;
     min-height: 2em;
   }
-  /* 전송하기 버튼 펄스 애니메이션 */
-  @keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-  }
-  
-  button[type="submit"].pulse {
-    animation: pulse 2s infinite;
-  }
+
   /* 모바일 전용 */
   @media (max-width: 600px) {
     .container {
@@ -145,4 +136,14 @@ body {
       padding: 12px;
       font-size: 1rem;
     }
+  }
+  /* 전송하기 버튼 펄스 애니메이션 */
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+  
+  button[type="submit"].pulse {
+    animation: pulse 2s infinite;
   }
