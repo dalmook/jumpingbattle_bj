@@ -18,10 +18,21 @@ document.addEventListener('DOMContentLoaded', () => {
   }));
 
   // 난이도 선택
+  const difficultyNote = document.getElementById('difficultyNote');
   difficultyButtons.forEach(btn => btn.addEventListener('click', () => {
+    // 선택 표시, 값 설정
     difficultyButtons.forEach(b => b.classList.remove('selected'));
     btn.classList.add('selected');
     difficultyInput.value = btn.dataset.value;
+
+    // 난이도별 안내 문구 업데이트
+    const mapping = {
+      'ㅂ베이직': '(처음이거나, 아이와 함께라면^^)',
+      'ㅇ이지': '(처음인데, 내가 발은 빠르다!)',
+      'ㄴ노멀': '(평소 운동 좀 한다!)',
+      'ㅎ하드': '(발이 안보인다. 너무 어려워요!)'
+    };
+    difficultyNote.textContent = mapping[btn.dataset.value] || '(처음이시라면 베이직, 이지 추천!)';
   }));
 
   form.addEventListener('submit', e => {
