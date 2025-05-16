@@ -25,7 +25,6 @@ body {
   }
 /* 구분선 추가: 각 입력 섹션 아래에 라인 */
 .field,
-.field-group,
 .room-group,
 .difficulty-group {
   padding-bottom: 12px;
