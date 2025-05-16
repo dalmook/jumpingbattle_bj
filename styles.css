@@ -23,6 +23,25 @@ body {
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     z-index: 1;
   }
+/* 구분선 추가: 각 입력 섹션 아래에 라인 */
+.field,
+.field-group,
+.room-group,
+.difficulty-group {
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* 마지막 요소에는 구분선 제거 */
+.field:last-of-type,
+.field-group:last-of-type,
+.room-group:last-of-type,
+.difficulty-group:last-of-type {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
   
   .field, .field-group {
     margin-bottom: 16px;
