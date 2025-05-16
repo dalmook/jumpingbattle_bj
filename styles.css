@@ -122,8 +122,8 @@ body {
   }
   
   button[type="submit"].pulse {
-    animation: pulse 3s infinite;
-  }  
+    animation: pulse 2s infinite;
+  }
   /* 모바일 전용 */
   @media (max-width: 600px) {
     .container {
