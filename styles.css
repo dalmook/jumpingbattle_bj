@@ -34,7 +34,6 @@ body {
 
 /* 마지막 요소에는 구분선 제거 */
 .field:last-of-type,
-.field-group:last-of-type,
 .room-group:last-of-type,
 .difficulty-group:last-of-type {
   border-bottom: none;
