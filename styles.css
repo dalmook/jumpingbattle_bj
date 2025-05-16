@@ -116,7 +116,19 @@ body {
     color: #333;
     min-height: 2em;
   }
-
+  /* 배너 영역 */
+#reminderBanner {
+  background: #e0f7fa;          /* 연한 청록 배경 */
+  color: #00695c;               /* 진한 청록 텍스트 */
+  border: 1px solid #00695c;    /* 테두리와 컬러 매치 */
+  padding: 12px 16px;           /* 위아래 12px, 좌우 16px */
+  border-radius: 6px;           /* 모서리 둥글게 */
+  font-weight: 600;             /* 글자 강조 */
+  text-align: center;           /* 가운데 정렬 */
+  margin-bottom: 20px;          /* 버튼과의 간격 */
+  font-size: 1rem;              /* 읽기 좋은 기본 크기 */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
   /* 모바일 전용 */
   @media (max-width: 600px) {
     .container {
