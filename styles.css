@@ -151,3 +151,10 @@ body {
       font-size: 1rem;
     }
   }
+  /* 추가: 방 크기 별 인원 안내 */
+.room-info {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
