@@ -70,6 +70,8 @@ body {
     border-color: #005A9E;
   }
   button[type="submit"] {
+  display: inline-block; /* transform 효력을 위해 */
+  width: 100%;
     width: 100%;
     padding: 16px;
     font-size: 1.2rem;
@@ -137,18 +139,3 @@ body {
       font-size: 1rem;
     }
   }
-  /* 전송하기 버튼 펄스 애니메이션 */
-@-webkit-keyframes pulse {
-  0% { -webkit-transform: scale(1); transform: scale(1); }
-  50% { -webkit-transform: scale(1.05); transform: scale(1.05); }
-  100% { -webkit-transform: scale(1); transform: scale(1); }
-}
-@keyframes pulse {
-  0% { -webkit-transform: scale(1); transform: scale(1); }
-  50% { -webkit-transform: scale(1.05); transform: scale(1.05); }
-  100% { -webkit-transform: scale(1); transform: scale(1); }
-}
-
-button[type="submit"].pulse {
-  animation: pulse 2s infinite;
-}
