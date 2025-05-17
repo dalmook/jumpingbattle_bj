@@ -1,5 +1,5 @@
 // Google Apps Script 웹앱 URL
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw6h7jrFbfrEmnIk1w8WEMa2IlyLsUy2Yp77I9QgcqywpjHjm6SrkgUnmyU4DYFHcwNCw/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwavznviFaBgiQ887K7vPft6zKOnwDzfZKESBrg6PK9ICgJXbdeiKYcoa1XzQc-xPPppQ/exec';
 
 document.addEventListener('DOMContentLoaded', () => {
   const walkInInput = document.getElementById('walkInTime');
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 필수 검사
-    const Name = '워크인';
+    const inName = '워크인';
     const teamName = form.teamName.value.trim();
     const adult = Number(form.adultCount.value);
     const youth = Number(form.youthCount.value);
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const payload = {
       walkInTime: slotStr,
       roomSize: roomInput.value,
-      Name,
+      inName,
       teamName,
       difficulty: difficultyInput.value,
       totalCount: adult + youth,
