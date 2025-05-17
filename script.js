@@ -47,7 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 필수 검사
-    const inName = '워크인';
     const teamName = form.teamName.value.trim();
     const adult = Number(form.adultCount.value);
     const youth = Number(form.youthCount.value);
@@ -78,7 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const payload = {
       walkInTime: slotStr,
       roomSize: roomInput.value,
-      inName,
       teamName,
       difficulty: difficultyInput.value,
       totalCount: adult + youth,
