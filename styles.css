@@ -31,6 +31,12 @@ body {
   margin-bottom: 16px;
   border-bottom: 1px solid #ddd;
 }
+/* field-group 내부의 각 field 구분선 제거 */
+.field-group > .field {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
 
 /* 마지막 요소에는 구분선 제거 */
 .field:last-of-type,
