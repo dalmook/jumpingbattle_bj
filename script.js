@@ -1,5 +1,5 @@
 // Google Apps Script 웹앱 URL
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwavznviFaBgiQ887K7vPft6zKOnwDzfZKESBrg6PK9ICgJXbdeiKYcoa1XzQc-xPPppQ/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwuuEVDUgQigecyr8k78NmME2Tv2IdRCl8k77LtxA3BTOv6Mzd03JJ9w13k-OiM98WSOw/exec';
 
 document.addEventListener('DOMContentLoaded', () => {
   const walkInInput = document.getElementById('walkInTime');
