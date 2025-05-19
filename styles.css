@@ -23,6 +23,10 @@ body {
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     z-index: 1;
   }
+/* 방 선택 영역 전체 숨기기 */
+.field.room-group {
+  display: none !important;
+}
 /* 구분선 추가: 각 입력 섹션 아래에 라인 */
 .field,
 .room-group,
