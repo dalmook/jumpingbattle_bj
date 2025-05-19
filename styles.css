@@ -152,7 +152,9 @@ body {
   font-size: 1rem;              /* 읽기 좋은 기본 크기 */
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
-
+button[type="submit"] {
+  margin-top: 16px;  /* 차량번호 입력박스와 버튼 사이 여백 */
+}
   /* 모바일 전용 */
   @media (max-width: 600px) {
     .container {
