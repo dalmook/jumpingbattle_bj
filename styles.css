@@ -156,6 +156,10 @@ body {
 #roomSelect {display: none !important;}
 #peopleCount {display: none !important;}      
 
+/* styles.css 맨 아래 또는 button[type="submit"] 스타일에 추가 */
+button[type="submit"] {
+  margin-top: 16px;  /* 차량번호 입력박스와 버튼 사이 여백 */
+}      
   
   /* 모바일 전용 */
   @media (max-width: 600px) {
