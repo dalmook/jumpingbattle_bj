@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const youthAmount = youth * 5000;
     const totalAmount = adultAmount + youthAmount;
     resultDiv.innerHTML =
-      `전송완료!`;
+      `<strong style="font-size:1.2em; color:#d32f2f;">전송완료^^</strong><br>`;
 
     // 2초 후 UI 초기화 및 버튼 재활성화
     setTimeout(() => {
