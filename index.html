@@ -14,9 +14,29 @@
       <div class="field">
         <input type="text" id="teamName" name="teamName" placeholder="팀명을 입력하세요" required>
       </div>
-      <input type="hidden" id="roomSize" name="roomSize" value="C1" required>
-      <input type="hidden" id="adultCount" name="adultCount" value="0" required>
-      <input type="hidden" id="youthCount" name="youthCount" value="0" required>
+
+      <div id="roomSelect" class="field room-group">  
+        <label>방 선택 <span class="note">(예약현황에 따라 변경될 수 있습니다 ^^)</span></label>
+        <div class="room-buttons">
+          <button type="button" data-value="B1">대형 (B1)</button>
+          <button type="button" data-value="A1">중형 (A1)</button>
+          <button type="button" data-value="C1">소형 (C1)</button>
+          <button type="button" data-value="C2">소형 (C2)</button>
+        </div>
+          <!-- 기본값 C1 지정 -->            
+        <input type="hidden" id="roomSize" name="roomSize" value="C1" required>
+      </div>
+
+      <div class="field-group">
+        <div class="field half">
+          <label for="adultCount">성인 (인원)</label>
+          <input type="number" id="adultCount" name="adultCount" min="0" placeholder="0" required>
+        </div>
+        <div class="field half">
+          <label for="youthCount">청소년 (인원)</label>
+          <input type="number" id="youthCount" name="youthCount" min="0" placeholder="0" required>
+        </div>
+      </div>
 
       <div class="field difficulty-group">
         <label>
@@ -32,12 +52,15 @@
       </div>
 
       <div class="field">
+<!--         <label for="vehicle">차량번호 뒤 4자리 (주차등록이 필요한 경우)</label> -->
         <input type="number" id="vehicle" name="vehicle" maxlength="4"
                oninput="this.value=this.value.replace(/[^0-9]/g,'').slice(0,4)"
                placeholder="차량번호 뒤 4자리 (주차등록이 필요한 경우)">
       </div>
+     <!-- <div id="reminderBanner">✅ 입력 후 “🚀전송하기” 꼭 눌러주세요!</div> --!>
       <button type="submit">🚀 전송하기 꾸욱!</button>
     </form>
+    <div id="result" class="result"></div>
   </div>
   <script src="script.js" defer></script>
 </body>
