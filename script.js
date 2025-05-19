@@ -54,6 +54,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!teamName) {
       alert('팀명을 입력해주세요.'); submitBtn.disabled = false; return;
     }
+    if (adult + youth <= 0) {
+      alert('인원 수를 입력해주세요.'); submitBtn.disabled = false; return;
+    }
     if (vehicleVal !== '' && !/^\d{4}$/.test(vehicleVal)) {
       alert('차량번호는 숫자 네 자리 또는 빈칸으로 입력해주세요.');
       submitBtn.disabled = false;
@@ -95,7 +98,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const youthAmount = youth * 5000;
     const totalAmount = adultAmount + youthAmount;
     resultDiv.innerHTML =
-      `<strong style="font-size:1.2em; color:#d32f2f;">전송완료^^</strong><br>`;
+      `결제 금액 안내<br>` +
+      `<strong style="font-size:1.2em; color:#d32f2f;">총 금액 = ${totalAmount.toLocaleString()}원</strong><br>` +
+      `성인 ${adult}명 × 7,000원 = ${adultAmount.toLocaleString()}원<br>` +
+      `청소년 ${youth}명 × 5,000원 = ${youthAmount.toLocaleString()}원<br>`;
 
     // 2초 후 UI 초기화 및 버튼 재활성화
     setTimeout(() => {
