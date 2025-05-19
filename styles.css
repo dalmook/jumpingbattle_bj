@@ -155,9 +155,8 @@ body {
 /* ──────────────────────────────────────────────────────────
    “방 선택” 영역 전체만 숨기기
 ────────────────────────────────────────────────────────── */
-#roomSelect {
-  display: none !important;
-}
+#roomSelect {display: none !important;}
+#peopleCount {display: none !important;}      
 
   
   /* 모바일 전용 */
