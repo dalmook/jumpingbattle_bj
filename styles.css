@@ -22,7 +22,7 @@ body {
     max-width: 600px; /* 태블릿 대응 위해 확대 */
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     z-index: 1;
-
+  }
 /* 구분선 추가: 각 입력 섹션 아래에 라인 */
 .field,
 .room-group,
@@ -151,8 +151,7 @@ body {
   margin-bottom: 20px;          /* 버튼과의 간격 */
   font-size: 1rem;              /* 읽기 좋은 기본 크기 */
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}   
-  
+}
   /* 모바일 전용 */
   @media (max-width: 600px) {
     .container {
@@ -182,11 +181,3 @@ body {
   margin-top: 4px;
   margin-bottom: 8px;
 }
-
-#roomSelect {display: none !important;}
-#peopleCount {display: none !important;}      
-
-/* styles.css 맨 아래 또는 button[type="submit"] 스타일에 추가 */
-button[type="submit"] {
-  margin-top: 16px;  /* 차량번호 입력박스와 버튼 사이 여백 */
-}        
