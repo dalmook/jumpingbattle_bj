@@ -139,10 +139,7 @@ body {
     color: #333;
     min-height: 2em;
   }
-#teamName::placeholder {
-  color: #888;
-  opacity: 1; /* Firefox 전용: 불투명도 조정 */
-}
+
   /* 모바일 전용 */
   @media (max-width: 600px) {
     .container {
