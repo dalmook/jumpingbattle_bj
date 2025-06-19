@@ -5,8 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>점핑배틀</title>
   <link rel="stylesheet" href="styles.css">
-  <!-- Cleave.js CDN 추가 -->
-  <script src="https://cdn.jsdelivr.net/npm/cleave.js@1/dist/cleave.min.js"></script>
 </head>
 <body>
   <div class="container">
@@ -15,6 +13,8 @@
 
       <div class="field room-group">
         <label>방 선택 <span class="note">(관리자 선택)</span></label>
+             <div class="field room-group">
+<!--         <div class="room-info">대형 : 4~8인, 중형 : 2~6인, 소형 : 2~4인</div> -->
         <div class="room-buttons">
           <button type="button" data-value="B1">대형 (B1)</button>
           <button type="button" data-value="A1">중형 (A1)</button>
@@ -22,11 +22,13 @@
           <button type="button" data-value="C2">소형 (C2)</button>
         </div>
         <input type="hidden" id="roomSize" name="roomSize" required>
-      </div>
+      </div>      
 
       <div class="field">
+<!--         <label for="teamName">팀명</label> -->
         <input type="text" id="teamName" name="teamName" placeholder="팀명을 입력하세요" required>
       </div>
+
 
       <div class="field-group">
         <div class="field half">
@@ -37,7 +39,9 @@
           <label for="youthCount">청소년•어린이 (인원)</label>
           <input type="number" id="youthCount" name="youthCount" min="0" placeholder="0" required>
         </div>
-      </div>
+      </div>    
+
+
 
       <div class="field difficulty-group">
         <label>
@@ -53,36 +57,16 @@
       </div>
 
       <div class="field">
-        <!-- type="text"로 변경, inputmode 추가 -->
-        <input
-          type="text"
-          id="vehicle"
-          name="vehicle"
-          placeholder="차량번호 뒤 4자리 (주차등록이 필요한 경우)"
-          inputmode="numeric"
-        >
-      </div>
+<!--         <label for="vehicle">차량번호 뒤 4자리 (주차등록이 필요한 경우)</label> -->
+        <input type="number" id="vehicle" name="vehicle" 
 
+               placeholder="차량번호 뒤 4자리 (주차등록이 필요한 경우)">
+      </div>
+     <!-- <div id="reminderBanner">✅ 입력 후 “🚀전송하기” 꼭 눌러주세요!</div> --!>
       <button type="submit">🚀 완료 </button>
     </form>
-
     <div id="result" class="result"></div>
   </div>
-
-  <!-- Cleave.js 초기화 스크립트 -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      new Cleave('#vehicle', {
-        numeral: true,
-        numeralThousandsGroupStyle: 'thousand',
-        delimiter: ',',
-        numeralDecimalMark: '.',
-        numeralIntegerScale: 4
-      });
-    });
-  </script>
-
-  <!-- 기존 스크립트 -->
   <script src="script.js" defer></script>
 </body>
 </html>
