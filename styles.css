@@ -31,7 +31,7 @@ body {
   margin-bottom: 20px;
 }
 .step-dot {
-  width: 25px; height: 25px;
+  width: 50px; height: 25px;
   border-radius: 50%;
   background: #ddd;
   display: flex; align-items: center; justify-content: center;
