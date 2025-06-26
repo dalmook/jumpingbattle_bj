@@ -9,6 +9,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const nextBtn = document.getElementById('nextBtn');
   const submitBtn = document.getElementById('submitBtn');
   let current = 0;
+  const teamNameList = ['점핑히어로', '배틀러버', '점핑스타즈','토끼점퍼',   '스카이러너', '판타스틱팀'];  
+  // ★ 자동 생성 버튼 이벤트
+  const genBtn = document.getElementById('generateTeamNameBtn');
+  const teamInput = document.getElementById('teamName');
+  genBtn.addEventListener('click', () => {
+    const rand = teamNameList[Math.floor(Math.random() * teamNameList.length)];
+    teamInput.value = rand;
+  });  
 
   function showStep(n) {
     steps.forEach((s, i) => s.style.display = i === n ? 'block' : 'none');
