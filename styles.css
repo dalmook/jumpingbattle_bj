@@ -1,0 +1,191 @@
+/* styles.css */
+body {
+  margin: 0;
+  padding: 0;
+  background: url('jumpingbattle_character_bg.jpg') no-repeat top center;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.container {
+  position: fixed;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255,255,255,0.95);
+  padding: 30px;
+  margin-top: 10px;
+  border-radius: 12px;
+  width: 95%; max-width: 600px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Step Indicator */
+.steps-indicator {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.step-dot {
+  width: 25px; height: 25px;
+  border-radius: 50%;
+  background: #ddd;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: bold; color: #666;
+  transition: background 0.3s;
+}
+.step-dot.active {
+  background: #007ACC; color: #fff;
+}
+
+/* 기본 스타일 */
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #333;
+}
+label .note {
+  color: #3F48CC;
+  font-style: italic;
+}
+input[type="text"],
+input[type="number"] {
+  width: 100%;
+  padding: 12px;
+  font-size: 1.2rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.field-group {
+  display: flex;
+  gap: 4%;
+  margin-bottom: 16px;
+}
+.field-group .half {
+  width: 48%;
+}
+
+/* 방 선택 */
+.room-buttons {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.room-buttons button {
+  flex: 1;
+  padding: 8px 0;
+  font-size: 1.1rem;
+  background: #fff;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  font-weight: 600;
+  color: #333;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+.room-buttons button.selected {
+  background: #007ACC;
+  color: #fff;
+  border-color: #005A9E;
+}
+
+/* 난이도 선택 (세로 + 설명) */
+.difficulty-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.difficulty-buttons button {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 12px;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+.difficulty-buttons button:hover {
+  border-color: #007ACC;
+}
+.difficulty-buttons button.selected {
+  background: #007ACC;
+  border-color: #005A9E;
+  color: #fff;
+}
+.difficulty-buttons .label {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.difficulty-buttons .desc {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 4px;
+  line-height: 1.3;
+}
+
+/* 네비게이션 버튼 */
+.step-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+.step-nav button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+#prevBtn {
+  background: #ccc;
+  color: #333;
+}
+#nextBtn {
+  background: #28A745;
+  color: #fff;
+}
+#submitBtn {
+  background: #005A9E;
+  color: #fff;
+}
+
+/* 결과 영역 */
+.result {
+  margin-top: 16px;
+  font-size: 1rem;
+  color: #333;
+  min-height: 2em;
+}
+
+/* 모바일 대응 */
+@media (max-width: 600px) {
+  .container {
+    width: 100%;
+    max-width: 80%;
+    padding: 20px;
+  }
+  input[type="text"],
+  input[type="number"] {
+    font-size: 1rem;
+    padding: 10px;
+  }
+  .room-buttons button,
+  .difficulty-buttons button {
+    font-size: 1rem;
+    padding: 10px;
+  }
+  .step-nav button {
+    padding: 10px;
+    font-size: 1rem;
+  }
+}
