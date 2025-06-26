@@ -24,22 +24,37 @@ body {
   z-index: 1;
 }
 
-/* Step Indicator */
+/* Step Indicator (반응형) */
 .steps-indicator {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 20px;
+  flex-wrap: nowrap;
+  padding: 0 8px;
 }
 .step-dot {
-  width: 50px; height: 25px;
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+  white-space: nowrap;
+  padding: 8px 4px;
   border-radius: 50%;
   background: #ddd;
-  display: flex; align-items: center; justify-content: center;
-  font-weight: bold; color: #666;
-  transition: background 0.3s;
+  color: #666;
+  font-weight: bold;
+  transition: background 0.3s, color 0.3s;
+  font-size: clamp(0.8rem, 4vw, 1.2rem);
 }
 .step-dot.active {
-  background: #007ACC; color: #fff;
+  background: #007ACC;
+  color: #fff;
+}
+@media (max-width: 400px) {
+  .step-dot {
+    padding: 6px 2px;
+    font-size: 0.8rem;
+  }
 }
 
 /* 기본 스타일 */
