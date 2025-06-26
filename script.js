@@ -68,10 +68,10 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
     submitBtn.disabled = true;
 
-    if (!confirm('입력한 정보가 맞습니까?')) {
-      submitBtn.disabled = false;
-      return;
-    }
+    // if (!confirm('입력한 정보가 맞습니까?')) {
+    //   submitBtn.disabled = false;
+    //   return;
+    // }
 
     const teamName = form.teamName.value.trim();
     const adult    = Number(form.adultCount.value);
