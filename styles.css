@@ -114,37 +114,36 @@ input[type="number"] {
 /* 팀명 입력 + 자동생성 버튼 */
 .auto-teamname {
   display: flex;
-  align-items: center;
-  gap: 8px;
+  flex-direction: column;
   margin-bottom: 16px;
 }
+.teamname-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 6px;
+}
 .auto-teamname input {
-  flex: 1;
   padding: 10px 12px;
   font-size: 1.1rem;
   border: 1px solid #ccc;
   border-radius: 6px;
 }
-#generateTeamNameBtn {
-  flex-shrink: 0;
-  padding: 10px 16px;
-  font-size: 0.95rem;
+.tiny-btn {
+  padding: 2px 6px;
+  font-size: 0.8rem;
   font-weight: 600;
   color: #fff;
-  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+  background: #feb47b;
   border: none;
-  border-radius: 6px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  border-radius: 4px;
   cursor: pointer;
-  transition: transform 0.1s, box-shadow 0.1s;
+  transition: background 0.2s;
 }
-#generateTeamNameBtn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-#generateTeamNameBtn:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+.tiny-btn:hover {
+  background: #ff9a5c;
 }
 
 /* 난이도 선택 (세로 + 설명) */
@@ -235,9 +234,9 @@ input[type="number"] {
     font-size: 1rem;
     padding: 10px;
   }
-  #generateTeamNameBtn {
-    padding: 8px 12px;
-    font-size: 0.9rem;
+  .tiny-btn {
+    padding: 2px 4px;
+    font-size: 0.75rem;
   }
   .step-nav button {
     padding: 10px;
