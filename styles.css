@@ -114,22 +114,16 @@ input[type="number"] {
 /* 팀명 입력 + 자동생성 버튼 */
 .auto-teamname {
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* 입력창은 라벨 아래, 버튼도 라벨에 속함 */
   margin-bottom: 16px;
 }
 .teamname-label {
-  display: flex;
+  display: inline-flex;   /* 라벨 텍스트 옆에 버튼 위치 */
   align-items: center;
   gap: 8px;
   font-weight: 600;
   color: #333;
   margin-bottom: 6px;
-}
-.auto-teamname input {
-  padding: 10px 12px;
-  font-size: 1.1rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
 }
 .tiny-btn {
   padding: 2px 6px;
@@ -144,6 +138,14 @@ input[type="number"] {
 }
 .tiny-btn:hover {
   background: #ff9a5c;
+}
+.auto-teamname input {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 1.1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
 }
 
 /* 난이도 선택 (세로 + 설명) */
