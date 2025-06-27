@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>점핑배틀</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <form id="reservationForm" class="form-grid" novalidate>
+    <!-- 숨겨진 값들 -->
+    <input type="hidden" id="walkInTime" name="walkInTime" />
+    <input type="hidden" id="roomSize" name="roomSize" required />
+    <input type="hidden" id="difficulty" name="difficulty" required />
+
+    <!-- 1. 방 선택 -->
+    <div class="card">
+      <h3>1. 방 선택</h3>
+      <div class="room-buttons">
+        <button type="button" data-value="B1">대형 (B1)</button>
+        <button type="button" data-value="A1">중형 (A1)</button>
+        <button type="button" data-value="C1">소형 (C1)</button>
+        <button type="button" data-value="C2">소형 (C2)</button>
+      </div>
+    </div>
+
+    <!-- 2. 인원 · 팀명 -->
+    <div class="card">
+      <h3>2. 인원 · 팀명</h3>
+      <div class="field-group">
+        <div class="field half">
+          <label for="adultCount">성인</label>
+          <input type="number" id="adultCount" name="adultCount" min="0" placeholder="0" required />
+        </div>
+        <div class="field half">
+          <label for="youthCount">청소년·어린이</label>
+          <input type="number" id="youthCount" name="youthCount" min="0" placeholder="0" required />
+        </div>
+      </div>
+      <div class="auto-teamname">
+        <label class="teamname-label" for="teamName">
+          팀명
+          <button type="button" id="generateTeamNameBtn" class="tiny-btn">자동 생성하기</button>
+        </label>
+        <input type="text" id="teamName" name="teamName" placeholder="팀명을 입력하세요" required />
+      </div>
+    </div>
+
+    <!-- 3. 난이도 선택 -->
+    <div class="card">
+      <h3>3. 난이도</h3>
+      <div class="difficulty-buttons">
+        <button type="button" data-value="ㅂ베이직">
+          <span class="label">베이직 ★</span>
+          <span class="desc">(👶처음이거나, 아이와 함께라면^^🎈)</span>
+        </button>
+        <button type="button" data-value="ㅇ이지">
+          <span class="label">이지 ★★</span>
+          <span class="desc">(😉처음인데, 내가 센스는 좀 있다!👍)</span>
+        </button>
+        <button type="button" data-value="ㅅ우주">
+          <span class="label">우주 ★★½</span>
+          <span class="desc">(🌌우주급 도전, 준비됐나요?🚀)</span>
+        </button>
+        <button type="button" data-value="ㄴ노멀">
+          <span class="label">노멀 ★★★</span>
+          <span class="desc">(💪평소 운동 좀 한다!🏃‍♂️)</span>
+        </button>
+        <button type="button" data-value="ㅎ하드">
+          <span class="label">하드 ★★★★</span>
+          <span class="desc">(🤯발이 안보인다! 너무 어려워요!🥵)</span>
+        </button>
+        <button type="button" data-value="ㅊ챌린저">
+          <span class="label">챌린저 ★★★★★</span>
+          <span class="desc">(🏆최강자 도전, 살아남을 수 있겠어?💥)</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 4. 차량번호 -->
+    <div class="card">
+      <h3>4. 차량번호</h3>
+      <input
+        type="text"
+        id="vehicle"
+        name="vehicle"
+        placeholder="뒤 4자리 (주차등록 필요 시)"
+        inputmode="numeric"
+        pattern="[0-9]*"
+      />
+      <p class="note">(차량 없으면 그대로 진행하세요)</p>
+    </div>
+
+    <!-- 최종 완료 버튼 -->
+    <div class="card actions">
+      <button type="submit" id="submitBtn">최종 완료 🚀</button>
+    </div>
+  </form>
+
+  <!-- 결제 안내 출력 영역 -->
+  <div id="result" class="result"></div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
