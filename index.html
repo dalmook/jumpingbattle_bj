@@ -50,12 +50,14 @@
       </div>
 
       <!-- 3단계: 팀명 입력 -->
-      <div class="step" data-step="3" style="display:none;">        
-        <label> <span class="note">3단계: 팀명 입력</span></label>
-     <div class="field auto-teamname">
-       <input type="text" id="teamName" name="teamName" placeholder="팀명을 입력하세요" required />
-       <button type="button" id="generateTeamNameBtn">자동 생성</button>
-     </div>
+      <div class="step" data-step="3" style="display:none;">
+        <div class="field auto-teamname">
+          <label for="teamName" class="teamname-label">
+            3단계: 팀명 입력
+            <button type="button" id="generateTeamNameBtn" class="tiny-btn">자동</button>
+          </label>
+          <input type="text" id="teamName" name="teamName" placeholder="팀명을 입력하세요" required />
+        </div>
       </div>
 
       <!-- 4단계: 난이도 선택 -->
