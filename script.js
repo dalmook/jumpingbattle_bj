@@ -2,7 +2,7 @@
 // ==============================
 // script.js (개선본)
 // ==============================
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzrQYWsGtcivWnD2ydP7PeNuWhEkeomZ7G1FpSnflUAjs00w6zT8bsjyPnugGmwyplS/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxx8EvZLwmNiBOOgj_LpI9ih4ckIBu9qfJZZPM7ygiWVB8QSo3u2HZ8NlvxA-nO8pIGow/exec';
 
 // 가격 상수 (필요 시 여기만 수정)
 const PRICE_ADULT = 7000;
